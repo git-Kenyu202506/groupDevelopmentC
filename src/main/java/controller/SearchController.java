@@ -28,6 +28,24 @@ public class SearchController {
 	public String ConditionSearch(Model m,
 			                      SearchCondition condition) {
 		
+		//年齢の範囲チェック
+		if(condition.getMinAge() != null && condition.getMaxAge() != null && 
+		   condition.getMinAge() > condition.getMaxAge()) {
+			
+		}
+		
+		//開始日の範囲チェック
+		if(condition.getMinStartDate() != null && condition.getMaxStartDate() != null &&
+		   condition.getMinEndDate().isAfter(condition.getMaxEndDate())) {
+			
+		}
+		
+		//終了日の範囲チェック
+		if(condition.getMinEndDate() != null && condition.getMaxEndDate() != null &&
+		   condition.getMinEndDate().isAfter(condition.getMaxEndDate())) {
+			
+		}
+		
 		List<Employee> search = searchService.searchEmployee(condition);
 		m.addAttribute("search", search);
 		
