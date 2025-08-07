@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>検索画面</title>
+
+    <link rel="stylesheet" th:href="@{/search.css}">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header></header>
+
+    <!-- メニューボタンと登録ボタン -->
+    <section></section>
+
+    <!-- 検索内容の表示欄 -->
+    <section>
+        <form th:action="@{/employee/search}" method="get">
+            <div>
+                <label for="id">社員ID</label>
+                <input type="text" name="id">
+            </div>
+        </form>
+    </section>
+
+    <!-- 検索ボタンとクリアボタン -->
+    <section></section>
+
+    <!-- 検索結果領域 -->
+    <section></section>
+
+    <!-- 削除ボタン -->
+    <section></section>
+
+    <!-- フッター -->
+    <footer></footer>
+</body>
+</html>
