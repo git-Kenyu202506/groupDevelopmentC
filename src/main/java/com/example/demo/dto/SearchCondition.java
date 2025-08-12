@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class SearchCondition {
 	
-	//検索条件のデータ
+	//検索画面で入力するデータのフィールド
 	private Integer id;
 	private String name;
 	private Integer minAge;
