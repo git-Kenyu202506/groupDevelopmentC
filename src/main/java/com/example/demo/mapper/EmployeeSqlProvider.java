@@ -11,39 +11,39 @@ public class EmployeeSqlProvider {
 		
 		//社員IDの検索クエリ
 		if(condition.getId() != null) {
-			sql.append("AND id = #{condition.id}");
+			sql.append(" AND id = #{condition.id}");
 		}
 		
 		//社員名の部分一致検索クエリ
 		if(condition.getName() != null && !condition.getName().isEmpty()) {
-			sql.append("AND name LIKE CONCAT('%', #{condition.name}, '%')");
+			sql.append(" AND name LIKE CONCAT('%', #{condition.name}, '%')");
 		}
 		
 		//年齢の範囲検索クエリ
 		if(condition.getMinAge() != null) {
-			sql.append("AND age >= #{condition.minAge}");
+			sql.append(" AND age >= #{condition.minAge}");
 		}
 		
 		if(condition.getMaxAge() != null) {
-			sql.append("AND age <= #{condition.maxAge}");
+			sql.append(" AND age <= #{condition.maxAge}");
 		}
 		
 		//開始日の範囲検索クエリ
 		if(condition.getMinStartDate() != null) {
-			sql.append("AND startDate >= #{condition.minStartDate}");
+			sql.append(" AND startDate >= #{condition.minStartDate}");
 		}
 		
 		if(condition.getMaxStartDate() != null) {
-			sql.append("AND startDate <= #{condition.maxStartDate}");
+			sql.append(" AND startDate <= #{condition.maxStartDate}");
 		}
 		
 		//終了日の範囲検索クエリ
 		if(condition.getMinEndDate() != null) {
-			sql.append("AND endDate >= #{condition.minEndDate}");
+			sql.append(" AND endDate >= #{condition.minEndDate}");
 		}
 		
 		if(condition.getMaxEndDate() != null) {
-			sql.append("AND endDate <= #{condition.maxEndDate}");
+			sql.append(" AND endDate <= #{condition.maxEndDate}");
 		}
 		
 		return sql.toString();
