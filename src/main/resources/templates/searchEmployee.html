@@ -14,27 +14,52 @@
     <!-- メニューボタンと登録ボタン -->
     <section></section>
 
-    <!-- 検索内容の表示欄 -->
+    <!-- 検索条件の入力欄 -->
     <section>
-        <form th:action="@{/employee/search}" method="post">
+        <!-- エラーメッセージ -->
+        <div th:if="${errorMessage}">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <form id="inputForm" th:action="@{/employee/search}" method="post" th:object="${searchCondition}">
             <label for="id">社員ID</label>
-            <input type="text" name="id">
+            <input type="text" name="id" th:field="*{id}">
 
             <label for="name">社員名</label>
-            <input type="text" name="name">
+            <input type="text" name="name" th:field="*{name}">
 
             <label for="age">年齢</label>
-            <input type="text" name="min_age">~<input type="text" name="max_age">
+            <input type="text" name="minAge" th:field="*{minAge}">~<input type="text" name="maxAge" th:field="*{maxAge}">
 
             <label for="start_date">開始日</label>
-            <input type="text" name="min_start_date">~<input type="text" name="max_start_date">
+            <input type="text" name="minStartDate" placeholder="yyyy/MM/dd"
+                   pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{minStartDate}">~
+            
+            <input type="text" name="maxStartDate" placeholder="yyyy/MM/dd"
+                   pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{maxStartDate}">
 
             <label for="end_date">終了日</label>
-            <input type="text" name="min_end_date">~<input type="text" name="max_end_date">
+            <input type="text" name="minEndDate" placeholder="yyyy/MM/dd"
+                   pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{minEndDate}">~
+
+
+            <input type="text" name="maxEndDate" placeholder="yyyy/MM/dd"
+                   pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{maxEndDate}">
 
             <!-- 検索ボタンとクリアボタン -->
             <button type="submit">検索</button>
+            <button type="button" onclick="resetForm()">クリア</button>
         </form>
+
+        <script>
+            function resetForm() {
+                //フォームの要素を取得
+                const form = document.getElementById('inputForm');
+
+                //フォームの内容をリセット
+                form.reset();
+            }
+        </script>
     </section>
 
     <!-- 検索結果領域 -->
