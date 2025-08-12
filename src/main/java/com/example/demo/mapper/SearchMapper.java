@@ -1,17 +1,18 @@
-package mapper;
+package com.example.demo.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
 
-import dto.SearchCondition;
-import entity.Employee;
+import com.example.demo.dto.SearchCondition;
+import com.example.demo.entity.Employee;
 
 @Mapper
 public interface SearchMapper {
 	
 	@SelectProvider(type = EmployeeSqlProvider.class, method = "buildSearchQuery")
-	List<Employee> searchEmployee(SearchCondition condition);
+	List<Employee> searchEmployee(@Param("condition") SearchCondition condition);
 	
 }

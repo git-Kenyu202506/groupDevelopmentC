@@ -16,16 +16,26 @@
 
     <!-- 検索内容の表示欄 -->
     <section>
-        <form th:action="@{/employee/search}" method="get">
-            <div>
-                <label for="id">社員ID</label>
-                <input type="text" name="id">
-            </div>
+        <form th:action="@{/employee/search}" method="post">
+            <label for="id">社員ID</label>
+            <input type="text" name="id">
+
+            <label for="name">社員名</label>
+            <input type="text" name="name">
+
+            <label for="age">年齢</label>
+            <input type="text" name="min_age">~<input type="text" name="max_age">
+
+            <label for="start_date">開始日</label>
+            <input type="text" name="min_start_date">~<input type="text" name="max_start_date">
+
+            <label for="end_date">終了日</label>
+            <input type="text" name="min_end_date">~<input type="text" name="max_end_date">
+
+            <!-- 検索ボタンとクリアボタン -->
+            <button type="submit">検索</button>
         </form>
     </section>
-
-    <!-- 検索ボタンとクリアボタン -->
-    <section></section>
 
     <!-- 検索結果領域 -->
     <section></section>

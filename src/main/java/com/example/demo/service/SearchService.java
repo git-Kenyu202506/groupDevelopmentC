@@ -1,13 +1,13 @@
-package service;
+package com.example.demo.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dto.SearchCondition;
-import entity.Employee;
-import mapper.SearchMapper;
+import com.example.demo.dto.SearchCondition;
+import com.example.demo.entity.Employee;
+import com.example.demo.mapper.SearchMapper;
 
 @Service
 public class SearchService {

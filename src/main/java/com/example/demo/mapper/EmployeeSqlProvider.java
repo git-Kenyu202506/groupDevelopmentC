@@ -1,46 +1,49 @@
-package mapper;
+package com.example.demo.mapper;
 
 import java.util.Map;
 
+import com.example.demo.dto.SearchCondition;
+
 public class EmployeeSqlProvider {
 	public static String buildSearchQuery(Map<String, Object> params) {
+		SearchCondition condition = (SearchCondition) params.get("condition");
 		StringBuilder sql = new StringBuilder("SELECT * FROM employee WHERE 1=1");
 		
 		//社員IDの検索クエリ
-		if(params.get("id") != null) {
-			sql.append("AND id = #{id}");
+		if(condition.getId() != null) {
+			sql.append("AND id = #{condition.id}");
 		}
 		
 		//社員名の部分一致検索クエリ
-		if(params.get("name") != null && !params.get("name").toString().isEmpty()) {
-			sql.append("AND name LIKE CONCAT('%', #{name}, '%')");
+		if(condition.getName() != null && !condition.getName().isEmpty()) {
+			sql.append("AND name LIKE CONCAT('%', #{condition.name}, '%')");
 		}
 		
 		//年齢の範囲検索クエリ
-		if(params.get("minAge") != null) {
-			sql.append("AND age >= #{minAge}");
+		if(condition.getMinAge() != null) {
+			sql.append("AND age >= #{condition.minAge}");
 		}
 		
-		if(params.get("maxAge") != null) {
-			sql.append("AND age <= #{maxAge}");
+		if(condition.getMaxAge() != null) {
+			sql.append("AND age <= #{condition.maxAge}");
 		}
 		
 		//開始日の範囲検索クエリ
-		if(params.get("minStartDate") != null) {
-			sql.append("AND startDate >= #{minStartDate}");
+		if(condition.getMinStartDate() != null) {
+			sql.append("AND startDate >= #{condition.minStartDate}");
 		}
 		
-		if(params.get("maxStartDate") != null) {
-			sql.append("AND startDate <= #{maxStartDate}");
+		if(condition.getMaxStartDate() != null) {
+			sql.append("AND startDate <= #{condition.maxStartDate}");
 		}
 		
 		//終了日の範囲検索クエリ
-		if(params.get("minEndDate") != null) {
-			sql.append("AND endDate >= #{minEndDate}");
+		if(condition.getMinEndDate() != null) {
+			sql.append("AND endDate >= #{condition.minEndDate}");
 		}
 		
-		if(params.get("maxEndDate") != null) {
-			sql.append("AND endDate <= #{maxEndDate}");
+		if(condition.getMaxEndDate() != null) {
+			sql.append("AND endDate <= #{condition.maxEndDate}");
 		}
 		
 		return sql.toString();
