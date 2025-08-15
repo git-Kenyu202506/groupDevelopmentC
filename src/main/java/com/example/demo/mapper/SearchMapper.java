@@ -15,4 +15,7 @@ public interface SearchMapper {
 	@SelectProvider(type = EmployeeSqlProvider.class, method = "buildSearchQuery")
 	List<Employee> searchEmployee(@Param("condition") SearchCondition condition);
 	
+	
+	@SelectProvider(type = EmployeeSqlProvider.class, method = "findBySql")
+	Employee selectById(@Param("id") int id);
 }
