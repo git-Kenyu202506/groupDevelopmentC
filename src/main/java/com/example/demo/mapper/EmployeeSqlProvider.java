@@ -48,4 +48,10 @@ public class EmployeeSqlProvider {
 		
 		return sql.toString();
 	}
+	
+	
+	//条件検索のクエリ
+	public static String findBySql() {
+		return "SELECT * FROM employee WHERE id = #{id}";
+	}
 }
