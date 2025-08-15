@@ -66,4 +66,9 @@ public class SearchService {
 		return searchMapper.searchEmployee(condition);
 	}
 	
+	
+	//条件検索
+	public Employee selectById(int id) {
+		return searchMapper.selectById(id);
+	}
 }
