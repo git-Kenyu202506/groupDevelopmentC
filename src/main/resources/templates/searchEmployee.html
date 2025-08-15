@@ -12,7 +12,15 @@
     <header></header>
 
     <!-- メニューボタンと登録ボタン -->
-    <section></section>
+    <section>
+        <div>
+            <a th:href="@{/employee/menu}">メニュー</a>
+        </div>
+
+        <div>
+            <a th:href="@{/employee/register}">登録</a>
+        </div>
+    </section>
 
     <!-- 検索条件の入力欄 -->
     <section>
@@ -54,19 +62,98 @@
         <script>
             function resetForm() {
                 //フォームの要素を取得
-                const form = document.getElementById('inputForm');
+                var form = document.getElementById('inputForm');
 
                 //フォームの内容をリセット
-                form.reset();
+                var input = form.querySelectorAll('input[type="text"]');
+                for(var i = 0; i < input.length; i++) {
+                    input[i].value = '';
+                }
             }
         </script>
     </section>
 
     <!-- 検索結果領域 -->
-    <section></section>
+    <section>
+        <!-- 取得した件数を表示 -->
+        <div>
+            <p><span th:text="${resultCount}"></span>件</p>
+        </div>
+        
+        <!-- 検索結果がある場合のみ表示 -->
+        <div th:if="${search != null}">
+            <form th:action="@{/employee/deleteConfirm}" method="post" id="deleteForm">
+                <table>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>ID</th>
+                        <th>氏名</th>
+                        <th>年齢</th>
+                        <th>開始日</th>
+                        <th>終了日</th>
+                    </tr>
+    
+                    <tr th:each="search : ${search}">
+                        <td><input type="checkbox" class="rowCheck" name="ids" th:value="${search.id}"></td>
+                        <td><a th:href="@{/employee/update/{id}(id=${search.id})}" th:text="${search.id}"></a></td>
+                        <td th:text="${search.name}"></td>
+                        <td th:text="${search.age}"></td>
+                        <td th:text="${search.startDate}"></td>
+                        <td th:text="${search.endDate}"></td>
+                    </tr>
+                </table>
 
-    <!-- 削除ボタン -->
-    <section></section>
+                <!-- 削除ボタン（最初は無効） -->
+                <button type="submit" id="deleteButton" disabled>削除</button>
+            </form>
+        </div>
+
+        <script>
+            //全選択のチェックボックスを取得
+            var selectAll = document.getElementById('selectAll');
+            //各行のチェックボックスを取得
+            var rowCheck = document.querySelectorAll('.rowCheck');
+            //削除ボタンを取得
+            var deleteButton = document.getElementById('deleteButton');
+
+            //全選択チェックボックスの処理
+            if(selectAll) {
+                //全選択のチェック状態が変わったときに実行
+                selectAll.addEventListener('change', function() {
+
+                    //各行のチェックボックスを全選択または全解除する
+                    for(var i = 0; i < rowCheck.length; i++) {
+                        rowCheck[i].checked = selectAll.checked;
+                    }
+                    //削除ボタンの有効と無効を切り替える
+                    toggleDeleteButton();
+                });
+
+                //各行のチェックボックスの処理
+                for(var j = 0; j < rowCheck.length; j++) {
+                    //個別のチェック状態が変わったときに実行
+                    rowCheck[j].addEventListener('change', toggleDeleteButton);
+                }
+            }
+
+
+            //削除ボタンのon/off切り替え機能
+            function toggleDeleteButton() {
+                var anyChecked = false;
+                //1つでもチェックが入っているか確認
+                for(var i = 0; i < rowCheck.length; i++) {
+                    if(rowCheck[i].checked) {
+                        //1つでもチェックが入っていたらtrue
+                        anyChecked = true;
+                        break;
+                    }
+                }
+
+                //anyCheckedがtrueなら削除ボタン有効、falseなら無効
+                deleteButton.disabled = !anyChecked;
+            }
+        </script>
+    </section>
 
     <!-- フッター -->
     <footer></footer>
