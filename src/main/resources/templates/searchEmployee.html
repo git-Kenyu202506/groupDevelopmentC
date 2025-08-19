@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>検索画面</title>
 
+    <link rel="stylesheet" th:href="@{/fragments.css}">
     <link rel="stylesheet" th:href="@{/search.css}">
 </head>
 <body>
     <!-- ヘッダー -->
-    <header></header>
+    <div th:replace="~{fragments/header :: header('社員情報検索', ${session.name}, ${session.loginDateTime})}"></div>
 
     <!-- メニューボタンと登録ボタン -->
     <section>
         <div>
-            <a th:href="@{/employee/menu}">メニュー</a>
+            <a th:href="@{/employee/mainMenu}">メニュー</a>
         </div>
 
         <div>
@@ -75,14 +76,14 @@
 
     <!-- 検索結果領域 -->
     <section>
-        <!-- 取得した件数を表示 -->
-        <div>
-            <p><span th:text="${resultCount}"></span>件</p>
-        </div>
-        
         <!-- 検索結果がある場合のみ表示 -->
         <div th:if="${search != null}">
-            <form th:action="@{/employee/deleteConfirm}" method="post" id="deleteForm">
+            <!-- 取得した件数を表示 -->
+            <div>
+                <p><span th:text="${resultCount}"></span>件</p>
+            </div>
+
+            <form th:action="@{/employee/deleteConfirm}" method="get" id="deleteForm">
                 <table>
                     <tr>
                         <th><input type="checkbox" id="selectAll"></th>
@@ -156,6 +157,6 @@
     </section>
 
     <!-- フッター -->
-    <footer></footer>
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
