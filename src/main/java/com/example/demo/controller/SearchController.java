@@ -30,6 +30,13 @@ public class SearchController {
 	@RequestMapping("/employee/search")
 	public String ConditionSearch(@ModelAttribute SearchCondition condition, Model m) {
 		
+		//ログイン情報のセッションを取得
+		String name = (String) session.getAttribute("name");
+		String loginDateTime = (String) session.getAttribute("loginDateTime");
+		
+		m.addAttribute("name", name);
+		m.addAttribute("loginDateTime", loginDateTime);
+		
 		//全ての検索条件がnullか判定
 		boolean isFirstAccess = (condition.getId() == null &&
 				                 condition.getName() == null &&
@@ -71,10 +78,6 @@ public class SearchController {
 			m.addAttribute("resultCount", search.size()); //件数を取得
 		}
 		
-		
-		//セッションのユーザー情報を取得（ログインのコントローラーができたら追加）
-		
-		
 		return "searchEmployee";
 	}
 	
@@ -90,11 +93,14 @@ public class SearchController {
 	}
 	
 	
-	//削除確認画面へ遷移
+	//社員情報削除（確認）画面へ遷移
+	@PostMapping("/employee/deleteConfirm")
 	public String passDlete(@RequestParam List<Integer> ids, Model m) {
 		
 		m.addAttribute("ids", ids);
 		
 		return "deleteConfirm";
 	}
+	
+	
 }
