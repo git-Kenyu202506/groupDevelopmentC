@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メインメニュー</title>
+
+    <link rel="stylesheet" th:href="@{/fragments.css}">
+    <link rel="stylesheet" th:href="@{/mainMenu.css}">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <div th:replace="~{fragments/header :: header('トップメニュー', ${session.name}, ${session.loginDateTime})}"></div>
+
+    <!-- 各ページのリンク -->
+    <section>
+        <div>
+            <a th:href="@{/employee/search}">社員情報検索</a>
+            <a th:href="@{/employee/register}">社員情報登録</a>
+        </div>
+
+        <div>
+            <a th:href="@{/employee/deleteConfirm}">社員情報削除</a>
+            <a th:href="@{/employee/update}">社員情報更新</a>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
