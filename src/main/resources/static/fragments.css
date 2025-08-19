@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/* 全体 */
+body {
+    font-family: sans-serif;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ヘッダー */
+h1 {
+    color: red;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222222;
+}
+
+.login-info {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.login-info p {
+    margin: 0;
+}
