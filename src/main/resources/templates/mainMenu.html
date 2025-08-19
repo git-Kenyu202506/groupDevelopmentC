@@ -6,7 +6,9 @@
     <title>メインメニュー</title>
 
     <link rel="stylesheet" th:href="@{/fragments.css}">
+    <link rel="stylesheet" href="../static/fragments.css">
     <link rel="stylesheet" th:href="@{/mainMenu.css}">
+    <link rel="stylesheet" href="../static/mainMenu.css">
 </head>
 <body>
     <!-- ヘッダー -->
@@ -16,12 +18,16 @@
     <section>
         <div>
             <a th:href="@{/employee/search}">社員情報検索</a>
+            <a href="searchEmployee.html">社員情報検索</a>
             <a th:href="@{/employee/register}">社員情報登録</a>
+            <a href="#register">社員情報登録</a>
         </div>
 
         <div>
             <a th:href="@{/employee/deleteConfirm}">社員情報削除</a>
+            <a href="#deleteInsert">社員情報削除</a>
             <a th:href="@{/employee/update}">社員情報更新</a>
+            <a href="#updateInsert">社員情報更新</a>
         </div>
     </section>
 
