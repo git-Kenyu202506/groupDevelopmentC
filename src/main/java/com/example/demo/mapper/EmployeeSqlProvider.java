@@ -51,7 +51,7 @@ public class EmployeeSqlProvider {
 	
 	
 	//条件検索のクエリ
-	public static String searchCondition() {
+	public static String searchConditionQuery() {
 		return "SELECT * FROM employee WHERE id = #{id}";
 	}
 }
