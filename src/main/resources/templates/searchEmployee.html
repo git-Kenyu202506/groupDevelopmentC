@@ -83,7 +83,7 @@
                 <p><span th:text="${resultCount}"></span>件</p>
             </div>
 
-            <form th:action="@{/employee/deleteConfirm}" method="get" id="deleteForm">
+            <form th:action="@{/employee/deleteConfirm}" method="post" id="deleteForm">
                 <table>
                     <tr>
                         <th><input type="checkbox" id="selectAll"></th>
