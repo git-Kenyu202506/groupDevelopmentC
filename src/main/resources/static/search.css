@@ -1,1 +1,47 @@
 @charset "UTF-8";
+
+/* 全体 */
+body {
+    font-family: sans-serif;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+/* メニューボタンと登録ボタン */
+.link {
+    display: flex;
+}
+
+.menu-button {
+    margin-right: 20px;
+}
+
+.menu-link, .register-link {
+    text-decoration: none;
+    color: black;
+}
+
+/* 検索条件の入力欄 */
+.input-area {
+    display: flex;
+}
+
+.right-block button {
+    display: block;
+}
+
+.center-right-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* 検索結果領域 */
+.result-header {
+    display: flex;
+    align-items: center;
+}
+
