@@ -15,6 +15,7 @@ h1 {
     color: red;
     font-size: 25px;
     margin-bottom: 10px;
+    font-weight: 400;
 }
 
 .flexbox {
@@ -32,3 +33,18 @@ h1 {
 .login-info p {
     margin: 0;
 }
+
+.login-info div {
+    color: #222222;
+    margin-right: 10px;
+}
+
+
+/* フッター */
+footer {
+   position: fixed;
+   bottom: 0;
+   right: 0;
+   margin-right: 15px;
+}
+
