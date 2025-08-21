@@ -9,154 +9,185 @@
     <link rel="stylesheet" th:href="@{/search.css}">
 </head>
 <body>
-    <!-- ヘッダー -->
-    <div th:replace="~{fragments/header :: header('社員情報検索', ${session.name}, ${session.loginDateTime})}"></div>
-
-    <!-- メニューボタンと登録ボタン -->
-    <section>
-        <div>
-            <a th:href="@{/employee/mainMenu}">メニュー</a>
-        </div>
-
-        <div>
-            <a th:href="@{/employee/register}">登録</a>
-        </div>
-    </section>
-
-    <!-- 検索条件の入力欄 -->
-    <section>
-        <!-- エラーメッセージ -->
-        <div th:if="${errorMessage}">
-            <p th:text="${errorMessage}"></p>
-        </div>
-
-        <form id="inputForm" th:action="@{/employee/search}" method="post" th:object="${searchCondition}">
-            <label for="id">社員ID</label>
-            <input type="text" name="id" th:field="*{id}">
-
-            <label for="name">社員名</label>
-            <input type="text" name="name" th:field="*{name}">
-
-            <label for="age">年齢</label>
-            <input type="text" name="minAge" th:field="*{minAge}">~<input type="text" name="maxAge" th:field="*{maxAge}">
-
-            <label for="start_date">開始日</label>
-            <input type="text" name="minStartDate" placeholder="yyyy/MM/dd"
-                   pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{minStartDate}">~
-            
-            <input type="text" name="maxStartDate" placeholder="yyyy/MM/dd"
-                   pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{maxStartDate}">
-
-            <label for="end_date">終了日</label>
-            <input type="text" name="minEndDate" placeholder="yyyy/MM/dd"
-                   pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{minEndDate}">~
-
-
-            <input type="text" name="maxEndDate" placeholder="yyyy/MM/dd"
-                   pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{maxEndDate}">
-
-            <!-- 検索ボタンとクリアボタン -->
-            <button type="submit">検索</button>
-            <button type="button" onclick="resetForm()">クリア</button>
-        </form>
-
-        <script>
-            function resetForm() {
-                //フォームの要素を取得
-                var form = document.getElementById('inputForm');
-
-                //フォームの内容をリセット
-                var input = form.querySelectorAll('input[type="text"]');
-                for(var i = 0; i < input.length; i++) {
-                    input[i].value = '';
-                }
-            }
-        </script>
-    </section>
-
-    <!-- 検索結果領域 -->
-    <section>
-        <!-- 検索結果がある場合のみ表示 -->
-        <div th:if="${search != null}">
-            <!-- 取得した件数を表示 -->
-            <div>
-                <p><span th:text="${resultCount}"></span>件</p>
-            </div>
-
-            <form th:action="@{/employee/deleteConfirm}" method="post" id="deleteForm">
-                <table>
-                    <tr>
-                        <th><input type="checkbox" id="selectAll"></th>
-                        <th>ID</th>
-                        <th>氏名</th>
-                        <th>年齢</th>
-                        <th>開始日</th>
-                        <th>終了日</th>
-                    </tr>
+    <div class="wrapper">
+        <!-- ヘッダー -->
+        <div th:replace="~{fragments/header :: header('社員情報検索', ${session.name}, ${session.loginDateTime})}"></div>
     
-                    <tr th:each="search : ${search}">
-                        <td><input type="checkbox" class="rowCheck" name="ids" th:value="${search.id}"></td>
-                        <td><a th:href="@{/employee/update/{id}(id=${search.id})}" th:text="${search.id}"></a></td>
-                        <td th:text="${search.name}"></td>
-                        <td th:text="${search.age}"></td>
-                        <td th:text="${search.startDate}"></td>
-                        <td th:text="${search.endDate}"></td>
-                    </tr>
-                </table>
-
-                <!-- 削除ボタン（最初は無効） -->
-                <button type="submit" id="deleteButton" disabled>削除</button>
+        <!-- メニューボタンと登録ボタン -->
+        <section>
+            <div class="link">
+                <div class="menu-button">
+                    <a class="menu-link" th:href="@{/employee/mainMenu}">メニュー</a>
+                </div>
+        
+                <div class="register-button">
+                    <a class="register-link" th:href="@{/employee/register}">登録</a>
+                </div>
+            </div>
+        </section>
+    
+        <!-- 検索条件の入力欄 -->
+        <section>
+            <!-- エラーメッセージ -->
+            <div th:if="${errorMessage}">
+                <p th:text="${errorMessage}"></p>
+            </div>
+    
+            <form id="inputForm" th:action="@{/employee/search}" method="post" th:object="${searchCondition}">
+                <div class="input-area">
+                    <div class="left-block">
+                        <div>
+                            <label for="id">社員ID</label>
+                            <input type="text" name="id" th:field="*{id}">
+                        </div>
+            
+                        <div>
+                            <label for="name">社員名</label>
+                            <input type="text" name="name" th:field="*{name}">
+                        </div>
+                    </div>
+        
+                    <div class="center-right-wrapper">
+                        <div class="center-block">
+                            <div>
+                                <label for="age">年齢</label>
+                                <input type="text" name="minAge" th:field="*{minAge}"> ~ <input type="text" name="maxAge" th:field="*{maxAge}">
+                            </div>
+                
+                            <div>
+                                <label for="start_date">開始日</label>
+                                <input type="text" name="minStartDate" placeholder="yyyy/MM/dd"
+                                       pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{minStartDate}"> ~
+                                
+                                <input type="text" name="maxStartDate" placeholder="yyyy/MM/dd"
+                                       pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{maxStartDate}">
+                            </div>
+                
+                            <div>
+                                <label for="end_date">終了日</label>
+                                <input type="text" name="minEndDate" placeholder="yyyy/MM/dd"
+                                       pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{minEndDate}"> ~
+                    
+                    
+                                <input type="text" name="maxEndDate" placeholder="yyyy/MM/dd"
+                                       pattern="\d{4}/\d{2}/\d{2}" title="yyyy/MM/dd形式で入力してください" th:field="*{maxEndDate}">
+                            </div>
+                        </div>
+    
+                        <div class="right-block">
+                            <!-- 検索ボタンとクリアボタン -->
+                            <button type="submit">検索</button>
+                            <button type="button" onclick="resetForm()">クリア</button>
+                        </div>
+                    </div>
+                </div>
             </form>
-        </div>
+    
+            <script>
+                function resetForm() {
+                    //フォームの要素を取得
+                    var form = document.getElementById('inputForm');
+    
+                    //フォームの内容をリセット
+                    var input = form.querySelectorAll('input[type="text"]');
+                    for(var i = 0; i < input.length; i++) {
+                        input[i].value = '';
+                    }
+                }
+            </script>
+        </section>
+    
+        <!-- 検索結果領域 -->
+        <section>
+            <!-- 検索結果がある場合のみ表示 -->
+            <div th:if="${search != null}">
+                
+                <form th:action="@{/employee/deleteConfirm}" method="post" id="deleteForm">
+                    
+                    <div class="result-header">
+                        <!-- 取得した件数を表示 -->
+                        <div>
+                            <p><span th:text="${resultCount}"></span>件</p>
+                        </div>
+                        
+                        <!-- 削除ボタン（最初は無効） -->
+                        <div class="deleteButton-area">
+                            <button type="submit" id="deleteButton" disabled>削除</button>
+                        </div>
+                    </div>
 
-        <script>
-            //全選択のチェックボックスを取得
-            var selectAll = document.getElementById('selectAll');
-            //各行のチェックボックスを取得
-            var rowCheck = document.querySelectorAll('.rowCheck');
-            //削除ボタンを取得
-            var deleteButton = document.getElementById('deleteButton');
-
-            //全選択チェックボックスの処理
-            if(selectAll) {
-                //全選択のチェック状態が変わったときに実行
-                selectAll.addEventListener('change', function() {
-
-                    //各行のチェックボックスを全選択または全解除する
+                    <table>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>ID</th>
+                            <th>氏名</th>
+                            <th>年齢</th>
+                            <th>開始日</th>
+                            <th>終了日</th>
+                        </tr>
+        
+                        <tr th:each="search : ${search}">
+                            <td><input type="checkbox" class="rowCheck" name="ids" th:value="${search.id}"></td>
+                            <td><a th:href="@{/employee/update/{id}(id=${search.id})}" th:text="${search.id}"></a></td>
+                            <td th:text="${search.name}"></td>
+                            <td th:text="${search.age}"></td>
+                            <td th:text="${search.startDate}"></td>
+                            <td th:text="${search.endDate}"></td>
+                        </tr>
+                    </table>
+    
+                </form>
+            </div>
+    
+            <script>
+                //全選択のチェックボックスを取得
+                var selectAll = document.getElementById('selectAll');
+                //各行のチェックボックスを取得
+                var rowCheck = document.querySelectorAll('.rowCheck');
+                //削除ボタンを取得
+                var deleteButton = document.getElementById('deleteButton');
+    
+                //全選択チェックボックスの処理
+                if(selectAll) {
+                    //全選択のチェック状態が変わったときに実行
+                    selectAll.addEventListener('change', function() {
+    
+                        //各行のチェックボックスを全選択または全解除する
+                        for(var i = 0; i < rowCheck.length; i++) {
+                            rowCheck[i].checked = selectAll.checked;
+                        }
+                        //削除ボタンの有効と無効を切り替える
+                        toggleDeleteButton();
+                    });
+    
+                    //各行のチェックボックスの処理
+                    for(var j = 0; j < rowCheck.length; j++) {
+                        //個別のチェック状態が変わったときに実行
+                        rowCheck[j].addEventListener('change', toggleDeleteButton);
+                    }
+                }
+    
+    
+                //削除ボタンのon/off切り替え機能
+                function toggleDeleteButton() {
+                    var anyChecked = false;
+                    //1つでもチェックが入っているか確認
                     for(var i = 0; i < rowCheck.length; i++) {
-                        rowCheck[i].checked = selectAll.checked;
+                        if(rowCheck[i].checked) {
+                            //1つでもチェックが入っていたらtrue
+                            anyChecked = true;
+                            break;
+                        }
                     }
-                    //削除ボタンの有効と無効を切り替える
-                    toggleDeleteButton();
-                });
-
-                //各行のチェックボックスの処理
-                for(var j = 0; j < rowCheck.length; j++) {
-                    //個別のチェック状態が変わったときに実行
-                    rowCheck[j].addEventListener('change', toggleDeleteButton);
+    
+                    //anyCheckedがtrueなら削除ボタン有効、falseなら無効
+                    deleteButton.disabled = !anyChecked;
                 }
-            }
-
-
-            //削除ボタンのon/off切り替え機能
-            function toggleDeleteButton() {
-                var anyChecked = false;
-                //1つでもチェックが入っているか確認
-                for(var i = 0; i < rowCheck.length; i++) {
-                    if(rowCheck[i].checked) {
-                        //1つでもチェックが入っていたらtrue
-                        anyChecked = true;
-                        break;
-                    }
-                }
-
-                //anyCheckedがtrueなら削除ボタン有効、falseなら無効
-                deleteButton.disabled = !anyChecked;
-            }
-        </script>
-    </section>
-
-    <!-- フッター -->
-    <div th:replace="~{fragments/footer :: footer}"></div>
+            </script>
+        </section>
+    
+        <!-- フッター -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
 </body>
 </html>
