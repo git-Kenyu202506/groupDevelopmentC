@@ -11,23 +11,25 @@
     <link rel="stylesheet" href="../static/mainMenu.css">
 </head>
 <body>
-    <!-- ヘッダー -->
-    <div th:replace="~{fragments/header :: header('トップメニュー', ${session.name}, ${session.loginDateTime})}"></div>
-
-    <!-- 各ページのリンク -->
-    <section>
-        <div>
-            <a th:href="@{/employee/search}">社員情報検索</a>
-            <a th:href="@{/employee/register}">社員情報登録</a>
-        </div>
-
-        <div>
-            <a th:href="@{/employee/deleteConfirm}">社員情報削除</a>
-            <a th:href="@{/employee/update}">社員情報更新</a>
-        </div>
-    </section>
-
-    <!-- フッター -->
-    <div th:replace="~{fragments/footer :: footer}"></div>
+    <div class="wrapper">
+        <!-- ヘッダー -->
+        <div th:replace="~{fragments/header :: header('トップメニュー', ${session.name}, ${session.loginDateTime})}"></div>
+    
+        <!-- 各ページのリンク -->
+        <section>
+            <div>
+                <a class="search-link" th:href="@{/employee/search}">社員情報検索</a>
+                <a class="register-link" th:href="@{/employee/register}">社員情報登録</a>
+            </div>
+    
+            <div>
+                <a class="delete-link" th:href="@{/employee/deleteConfirm}">社員情報削除</a>
+                <a class="update-link" th:href="@{/employee/update}">社員情報更新</a>
+            </div>
+        </section>
+    
+        <!-- フッター -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
 </body>
 </html>
