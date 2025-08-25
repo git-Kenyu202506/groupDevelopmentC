@@ -22,12 +22,40 @@ body {
 
 .menu-link, .register-link {
     text-decoration: none;
-    color: black;
+    color: #222222;
+    font-size: 1.2rem;
+    padding: 2px 8px 2px 2px;
+    display: inline-block;
+    width: 80px;
+    border: 1px solid #222222;
+}
+
+.menu-button, .register-button {
+    text-align: left;
+    margin-top: 8px;
+    margin-bottom: 30px;
+    margin-left: 5px;
+}
+
+.menu-link {
+    background-color: #f3f1e7;
+}
+
+.register-link {
+    background-color: #FED500;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: red;
 }
 
 /* 検索条件の入力欄 */
 .input-area {
     display: flex;
+    border-bottom:1px solid #222222 ;
+    width: calc(100% - 60px);
+    margin: 0 auto;
 }
 
 .right-block button {
@@ -39,9 +67,134 @@ body {
     align-items: center;
 }
 
+.input-area input {
+    height: 40px;
+    width: 110px;
+    font-size: 1rem;
+}
+
+label {
+    margin-right: 23px;
+    font-size: 1.2rem;
+}
+
+.input-age {
+    margin-right: 42px;
+}
+
+.left-block label {
+    margin-left: 13px;
+}
+
+.input-block {
+    margin-bottom: 25px;
+}
+
+.center-block {
+    margin-left: 50px;
+}
+
+.input-area span {
+    margin: 0 15px 0 15px;
+}
+
+
+/* 検索ボタンとクリアボタン */
+.right-block {
+    margin-left: 60px;
+}
+
+.search-button {
+    margin-bottom: 13px;
+}
+
+.right-block button {
+    height: 55px;
+    width: 100px;
+    text-align: left;
+    font-size: 1.2rem;
+    color: #222222;
+}
+
+.search-button {
+    background-color: #FF8300;
+    border: 1px solid #222222;
+}
+
+.search-button:hover {
+    background-color: #ffaa4f;
+}
+
 /* 検索結果領域 */
 .result-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
+.result-count {
+    margin-left: 40px;
+}
+
+.result-count p {
+    font-size: 1.2rem;
+    color: #222222;
+}
+
+.deleteButton-area {
+    margin-right: 675px;
+}
+
+#deleteButton {
+    width: 100px;
+    font-size: 1.2rem;
+    text-align: left;
+    background-color: #FED500;
+    border: 1px solid #222222;
+}
+
+#deleteButton:hover {
+    background-color: #ffe770;
+}
+
+table {
+    border-collapse: collapse;
+    width: 42%;
+    margin-left: 40px;
+}
+
+
+table, th, td {
+    border: 1px solid #222222;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left; 
+    font-size: 1.1rem;
+    height: 30px;
+}
+
+table th {
+    background-color: rgb(219, 231, 255);
+}
+
+.checkbox input[type="checkbox"] {
+    transform: scale(1.5);
+}
+
+.checkbox {
+    width: 20px;
+}
+
+.id {
+    width: 60px;
+}
+
+.name, .age {
+    width: 100px;
+}
+
+.start-date, .end-date {
+    width: 120px;
+}
