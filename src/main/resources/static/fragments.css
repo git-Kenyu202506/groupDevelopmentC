@@ -42,9 +42,8 @@ h1 {
 
 /* フッター */
 footer {
-   position: fixed;
-   bottom: 0;
-   right: 0;
+   position: static;
+   text-align: right;
    margin-right: 15px;
 }
 
