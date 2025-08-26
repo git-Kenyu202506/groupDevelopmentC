@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
@@ -7,6 +8,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +32,7 @@ public class SearchController {
 	
 	
 	@RequestMapping("/employee/search")
-	public String ConditionSearch(@ModelAttribute SearchCondition condition, Model m) {
+	public String ConditionSearch(@ModelAttribute SearchCondition condition, BindingResult bindingResult, Model m) {
 		
 		//ログイン情報のセッションを取得
 		String name = (String) session.getAttribute("name");
@@ -57,9 +60,26 @@ public class SearchController {
 		}
 		
 		
-		//入力チェック
-		String errorMessage = searchService.validationCheck(condition);
+		//入力チェックで返ってきた各エラーメッセージを格納するリスト
+		List<String> allErrors = new ArrayList<>();
+		
+		//入力チェック（IDと年齢の数値チェック）
+		if(bindingResult.hasErrors()) {
+			for(ObjectError error : bindingResult.getAllErrors()) {
+				allErrors.add(error.getDefaultMessage());
+			}
+		}
+		
+		
+		//入力チェック（サービス層のバリデーションチェック）
+		List<String> errorMessage = searchService.validationCheck(condition);
 		if(errorMessage != null) {
+			
+			allErrors.addAll(errorMessage);
+		}
+		
+		
+		if(allErrors != null) {
 			m.addAttribute("errorMessage", errorMessage);
 			m.addAttribute("resultCount", 0); //件数を0件表示にする
 			
