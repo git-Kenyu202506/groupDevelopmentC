@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,11 +29,14 @@ public class SearchController {
 	private SearchService searchService;
 	
 	@Autowired
+	private MessageSource messageSource;
+	
+	@Autowired
 	private HttpSession session;
 	
 	
 	@RequestMapping("/employee/search")
-	public String ConditionSearch(@ModelAttribute SearchCondition condition, BindingResult bindingResult, Model m) {
+	public String ConditionSearch(@ModelAttribute("searchCondition") SearchCondition condition, BindingResult bindingResult, Model m) {
 		
 		//ログイン情報のセッションを取得
 		String name = (String) session.getAttribute("name");
@@ -66,21 +70,22 @@ public class SearchController {
 		//入力チェック（IDと年齢の数値チェック）
 		if(bindingResult.hasErrors()) {
 			for(ObjectError error : bindingResult.getAllErrors()) {
-				allErrors.add(error.getDefaultMessage());
+				String resolvedMessage = messageSource.getMessage(error, null);
+				allErrors.add(resolvedMessage);
 			}
 		}
 		
 		
 		//入力チェック（サービス層のバリデーションチェック）
 		List<String> errorMessage = searchService.validationCheck(condition);
-		if(errorMessage != null) {
+		if(!errorMessage.isEmpty()) {
 			
 			allErrors.addAll(errorMessage);
 		}
 		
 		
-		if(allErrors != null) {
-			m.addAttribute("errorMessage", errorMessage);
+		if(!allErrors.isEmpty()) {
+			m.addAttribute("errorMessage", allErrors);
 			m.addAttribute("resultCount", 0); //件数を0件表示にする
 			
 			return "searchEmployee";
