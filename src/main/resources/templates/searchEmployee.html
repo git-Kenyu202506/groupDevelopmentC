@@ -40,9 +40,6 @@
                             <label for="id">社員ID</label>
                             <input type="text" name="id" th:field="*{id}">
                         </div>
-
-                        <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="error-message"></div>
-
             
                         <div class="input-block">
                             <label for="name">社員名</label>
@@ -56,9 +53,6 @@
                                 <label for="age" class="input-age">年齢</label>
                                 <input type="text" name="minAge" th:field="*{minAge}"> <span>～</span> <input type="text" name="maxAge" th:field="*{maxAge}">
                             </div>
-
-                            <div th:if="${#fields.hasErrors('minAge')}" th:errors="*{minAge}" class="error-message"></div>
-                            <div th:if="${#fields.hasErrors('maxAge')}" th:errors="*{maxAge}" class="error-message"></div>
                 
                             <div class="input-block">
                                 <label for="start_date">開始日</label>
