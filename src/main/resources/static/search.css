@@ -46,7 +46,7 @@ body {
 }
 
 /* エラーメッセージ */
-.error-message {
+#error-message {
     color: red;
 }
 
