@@ -37,14 +37,14 @@ public class MainMenuController {
 	}
 	
 	//社員情報削除（入力）画面へ遷移
-	@GetMapping("/employee/deleteInsert")
+	@GetMapping("/employee/delete")
 	public String showDelete() {
-		return "deleteInsert";
+		return "delete";
 	}
 	
 	//社員情報更新（社員ID入力）画面
 	@GetMapping("/employee/update")
 	public String showUpdate() {
-		return "updateInsert";
+		return "update";
 	}
 }
