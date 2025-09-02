@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entity.Employee;
+import com.example.demo.service.RegisterService;
+
 // http://localhost:8080/insertForm
 
 @Controller
 public class RegisterController {
 	@Autowired
-	private DummyService service;
+	private RegisterService service;
 	@Autowired
 	private HttpSession session;
 
@@ -44,12 +47,12 @@ public class RegisterController {
 			return "insertForm";
 		}
 // パスワードのフォーマット確認
-		if (!employee.isPasswordPatternValid()) {
+		if (!service.isPasswordPatternValid()) {
 			model.addAttribute("passwordFormError", "パスワードは半角英数字を含めてください");
 			return "insertForm";
 		}
 // パスワードの一致確認
-		if (!employee.isPasswordMatching()) {
+		if (!service.isPasswordMatching()) {
 			model.addAttribute("passwordUnmatch", "パスワードが一致しません。");
 			return "insertForm";
 		}
