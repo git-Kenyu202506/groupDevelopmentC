@@ -4,7 +4,7 @@ function resetForm() {
     var form = document.getElementById('inputForm');
     
     //フォームの内容をリセット
-    var input = form.querySelectorAll('input[type="text"]');
+    var input = form.querySelectorAll('input[type="text"], input[type="date"]');
     for(var i = 0; i < input.length; i++) {
         input[i].value = '';
     }
