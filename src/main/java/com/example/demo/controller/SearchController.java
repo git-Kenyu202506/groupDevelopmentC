@@ -98,7 +98,7 @@ public class SearchController {
 		//件数が0件のとき
 		if(search.isEmpty()) {
 			m.addAttribute("resultCount", 0);
-			m.addAttribute("errorMessage", "該当するデータはありません");
+			m.addAttribute("errorMessage", List.of("該当するデータはありません"));
 		}else {
 			//件数がある場合のみ一覧を渡す
 			m.addAttribute("search", search);
