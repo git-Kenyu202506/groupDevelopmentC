@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>社員登録情報（入力）</title>
-	<link rel="stylesheet" href="style0305.css">
+	<link rel="stylesheet" href="/style0305.css">
 	<script src="/js/form-validator.js"></script>
 
 	<script>
@@ -41,7 +41,7 @@
 
 	<main>
 
-		<form action="/insert_check" th:object="${Employee}" method="post">
+		<form action="/employee/insert_check" th:object="${Employee}" method="post">
 			<div class="input_line">
 				<label>社員名</label> <input type="text" name="name" th:field="*{name}" title="氏名を入力して下さい。" required
 					autofocus>
@@ -63,10 +63,10 @@
 				<div th:if="${#fields.hasErrors('password_check')}" th:errors="*{password_check}"></div>
 			</div><br>
 
-			<p class="copyright">Copyright©2022</p>
+			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
 			<div class="buttons">
 				<input type="submit" value="確認" class="input_button orange_button">
-				<input type="button" onclick="location.href='/DummyMain'" value="戻る" class="input_button">
+				<input type="button" onclick="location.href='/employee/mainMenu'" value="戻る" class="input_button">
 			</div>
 		</form>
 
