@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>社員登録情報（確認）</title>
-	<link rel="stylesheet" href="style0305.css">
+	<link rel="stylesheet" href="/style0305.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 
 	<main>
 
-		<form action="/insert" method="post">
+		<form action="/employee/insert" method="post">
 			<div class="input_line_check">
 				<span class="label">社員名</span> <span th:text="${Employee.name}"></span>
 				<input type="hidden" name="name" th:value="${Employee.name}" /><br>
@@ -42,11 +42,11 @@
 					th:text="${#strings.repeat('⚫︎',Employee.password_check.length())}"></span>
 				<input type="hidden" name="password_check" th:value="${Employee.password_check}" /><br>
 			</div>
-			<p class="copyright">Copyright©202
+			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
 			<p class="check_msg">これで登録します。よろしいですか？</p>
 			<div class="buttons">
 				<input type="submit" value="登録" class="input_button orange_button">
-				<input type="button" onclick="location.href='/insertForm'" class="input_button" value="戻る">
+				<input type="button" onclick=history.back() class="input_button" value="戻る">
 			</div>
 		</form>
 
