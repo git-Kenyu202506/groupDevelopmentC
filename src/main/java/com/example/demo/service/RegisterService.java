@@ -29,4 +29,5 @@ public class RegisterService {
 		//  1つずつ数字を含む半角英数字のみ
 		return employee.getPassword().matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$");
 	}
+	// 年齢は数字のみ？
 }
