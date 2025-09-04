@@ -1,10 +1,12 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Employee;
 import com.example.demo.mapper.RegisterMapper;
 
+@Service
 public class RegisterService {
 
 	@Autowired
@@ -16,11 +18,11 @@ public class RegisterService {
 		mapper.insert(employee);
 	}
 
-	public boolean isPasswordMatching() {
+	public boolean isPasswordMatching(Employee employee) {
 		return employee.getPassword() != null && employee.getPassword().equals(employee.getPassword_check());
 	}
 
-	public boolean isPasswordPatternValid() {
+	public boolean isPasswordPatternValid(Employee employee) {
 		if (employee.getPassword() == null) {
 			return false;
 		}
