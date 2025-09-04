@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entity.Employee;
+
 @Controller
 public class MainMenuController {
 
@@ -31,9 +33,10 @@ public class MainMenuController {
 	
 	
 	//社員情報登録画面へ遷移
-	@GetMapping("/employee/register")
-	public String showRegister() {
-		return "register";
+	@RequestMapping("/insertForm")
+	public String insertForm(Model model) {
+		model.addAttribute("Employee", new Employee());
+		return "insertForm";
 	}
 	
 	//社員情報削除（入力）画面へ遷移
