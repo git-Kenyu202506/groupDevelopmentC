@@ -18,11 +18,12 @@
 	<header>
 		<h1>社員登録情報（完了）</h1>
 		<div class="session">
-			<p>ログイン者名 <span th:text="${name}"></span></p>
-			<div class="login_time">
-				<p><span th:text="loginDateTime"></span>ログイン日時</p>
+				<p>ログイン者名 <span th:text="${name}"></span></p>
+				<div class="login_time">
+					<p>ログイン日時<span th:text="${date}"></span></p>
+					<p>ログイン時間<span th:text="${time}"></span></p>
+				</div>
 			</div>
-		</div>
 	</header>
 
 	<main>
@@ -34,8 +35,7 @@
 			<div class="buttons">
 				<input type="submit" onclick="location.href='http://localhost:8080/employee/mainMenu'" value="メニュー"
 					class="input_button">
-				<input type="submit" onclick="location.href='http://localhost:8080/employee/searchEmployee'" value="検索へ"
-					class="input_button orange_button">
+				<input type="submit" onclick="location.href='http://localhost:8080/employee/searchEmployee'" value="検索へ" class="input_button orange_button">
 			</div>
 		</div>
 	</main>

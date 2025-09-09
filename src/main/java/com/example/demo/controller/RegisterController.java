@@ -26,34 +26,23 @@ public class RegisterController {
 	@Autowired
 	private HttpSession session;
 
-	
-	
 	//入力された情報の確認画面
 	@PostMapping("/insert_check")
 	public String insert_check(@ModelAttribute("Employee") @Validated Employee employee,
 			BindingResult bindingResult,
-			Model m) {
-		
-		//ログイン中のセッションを取得 MainMenuより参照
-		String id = (String) session.getAttribute("id");
-		String name = (String) session.getAttribute("name");
-		String loginDateTime = (String) session.getAttribute("loginDateTime");
-		
-		m.addAttribute("id", id);
-		m.addAttribute("name", name);
-		m.addAttribute("loginDateTime", loginDateTime);
+			Model model) {
 
 		if (bindingResult.hasErrors()) {
 			return "insertForm";
 		}
 		// パスワードのフォーマット確認
 		if (!service.isPasswordPatternValid(employee)) {
-			m.addAttribute("passwordFormError", "パスワードは半角英数字を含めてください");
+			model.addAttribute("passwordFormError", "パスワードは半角英数字を含めてください");
 			return "insertForm";
 		}
 		// パスワードの一致確認
 		if (!service.isPasswordMatching(employee)) {
-			m.addAttribute("passwordUnmatch", "パスワードが一致しません。");
+			model.addAttribute("passwordUnmatch", "パスワードが一致しません。");
 			return "insertForm";
 		}
 		return "insert_check";
