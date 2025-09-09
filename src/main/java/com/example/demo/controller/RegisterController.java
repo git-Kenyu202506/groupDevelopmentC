@@ -26,15 +26,6 @@ public class RegisterController {
 	@Autowired
 	private HttpSession session;
 
-	//CheckクラスからEmployeeクラスに参照先を変更
-	//登録情報入力画面
-
-	@RequestMapping("/insertForm")
-	public String insertForm(Model model) {
-		model.addAttribute("Employee", new Employee());
-		return "insertForm";
-	}
-
 	//入力された情報の確認画面
 	@PostMapping("/insert_check")
 	public String insert_check(@ModelAttribute("Employee") @Validated Employee employee,
