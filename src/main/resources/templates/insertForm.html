@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>社員登録情報（入力）</title>
-	<link rel="stylesheet" href="/style0305.css">
+	<link rel="stylesheet" th:href="@{/style0305.css}">
 	<script src="/js/form-validator.js"></script>
 
 	<script>
@@ -16,6 +16,13 @@
 			input.value = input.value.replace(/[^a-zA-Z0-9]/g, "");
 		}
 
+	</script>
+
+	<script th:if="${nameNull != null}">
+		alert('[[${nameNull}]]');
+	</script>
+	<script th:if="${ageNull != null}">
+		alert('[[${ageNull}]]');
 	</script>
 	<script th:if="${passwordUnmatch != null}">
 		alert('[[${passwordUnmatch}]]');
@@ -31,18 +38,10 @@
 	<header>
 		<h1>社員登録情報（入力）</h1>
 		<div class="session">
-			<p>ログイン者名 <span th:text="${name}"></span></p>
+			<p><span th:text="${name} ?: '未ログイン'"></span>さん</p>
 			<div class="login_time">
-				<p>ログイン日時<span th:text="${loginDatetime}"></span></p>
+				<p><span th:text="${loginDateTime} ?: '---'"></span></p>
 			</div>
-			<!-- <div>
-			                     <p><span th:text="${name}">菅原</span>さん</p>
-			                 </div>
-			         
-			                 <div>
-			                     <p th:text="${loginDateTime}">2025/08/19 19:00</p>
-			</div> -->
-
 		</div>
 	</header>
 
@@ -73,7 +72,7 @@
 			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
 			<div class="buttons">
 				<input type="submit" value="確認" class="input_button orange_button">
-				<input type="button" onclick="location.href='/employee/mainMenu'" value="戻る" class="input_button">
+				<a th:href="@{/employee/backMainMenu}" class="input_button_like">戻る</a>
 			</div>
 		</form>
 
