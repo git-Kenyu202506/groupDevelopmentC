@@ -18,6 +18,13 @@ public class RegisterService {
 		mapper.insert(employee);
 	}
 
+	public boolean isNameInputValid(Employee employee) {
+		return employee.getName()!= null;
+	}
+	public boolean isAgeInputValid(Employee employee) {
+		return employee.getAge() > 0;
+	}
+	
 	public boolean isPasswordMatching(Employee employee) {
 		return employee.getPassword() != null && employee.getPassword().equals(employee.getPassword_check());
 	}
