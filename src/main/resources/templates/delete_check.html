@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>社員情報削除（確認）</title>
+	<link rel="stylesheet" href="/style0305.css">
+
+</head>
+
+<body>
+
+	<header>
+		<h1>社員情報削除（確認）</h1>
+		<div class="session">
+			<p>ログイン者名 <span th:text="${name}"></span></p>
+			<div class="login_time">
+				<p>ログイン日時<span th:text="${date}"></span></p>
+				<p>ログイン時間<span th:text="${time}"></span></p>
+			</div>
+			</div>
+	</header>
+
+	<main>
+
+		<form action="/employee/delete" method="post">
+			<div class="delete_line">
+				<div class="input_line">
+					<label>社員ID</label> <span th:text="${employee.id}"></span>
+					<input type="hidden" name="id" th:value="${employee.id}" /><br>
+				</div>
+			</div>
+			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
+			<p class="check_msg">こちらを削除します。よろしいですか？</p>
+			<div class="buttons">
+				<input type="submit" value="削除" class="input_button orange_button">
+				<input type="button" onclick="history.back()" value="戻る" class="input_button">
+			</div>
+		</form>
+
+
+
+
+
+	</main>
+
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>社員情報削除（入力）</title>
+	<link rel="stylesheet" href="/style0305.css">
+	<script src="/js/form-validator.js"></script>
+
+	<script>
+		function validateNumberInput(input) {
+			input.value = input.value.replace(/[^0-9]/g, "");
+		}
+	</script>
+</head>
+
+<body>
+
+	<header>
+		<h1>社員情報削除（入力）</h1>
+		<div class="session">
+				<p>ログイン者名 <span th:text="${name}"></span></p>
+				<div class="login_time">
+					<p>ログイン日時<span th:text="${date}"></span></p>
+					<p>ログイン時間<span th:text="${time}"></span></p>
+				</div>
+			</div>
+	</header>
+
+	<main>
+		<form action="/employee/delete_check" th:object="${Employee}" method="post">
+			<div class="input_line">
+				<label> 社員ID</label>
+				<input type="text" name="id" th:value="${Employee.id == 0 ? '': Employee.id}"
+					oninput="validateNumberInput(this)" title="社員IDを入力して下さい。" required>
+			</div>
+			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
+			<div class="buttons">
+				<input type="submit" value="確認" class="input_button orange_button">
+				<input type="button" onclick="location.href='/DummyMain'" value="戻る" class="input_button">
+			</div>
+		</form>
+
+
+
+
+	</main>
+
+</body>
+
+</html>
