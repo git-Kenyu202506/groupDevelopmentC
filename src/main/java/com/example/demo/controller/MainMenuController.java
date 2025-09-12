@@ -33,17 +33,17 @@ public class MainMenuController {
 	
 	
 	//社員情報登録画面へ遷移
-	@RequestMapping("/insertForm")
-	public String insertForm(Model model) {
-		model.addAttribute("Employee", new Employee());
-		return "insertForm";
+	@GetMapping("/employee/register")
+	public String showRegister() {
+		return "register";
 	}
 	
 	//社員情報削除（入力）画面へ遷移
-	@GetMapping("/employee/deleteInsert")
-	public String showDelete() {
-		return "deleteInsert";
-	}
+		@GetMapping("/employee/deleteForm")
+		public String deleteForm(Model model) {
+			model.addAttribute("Employee", new Employee());
+			return "deleteForm";
+		}
 	
 	//社員情報更新（社員ID入力）画面
 	@GetMapping("/employee/update")
