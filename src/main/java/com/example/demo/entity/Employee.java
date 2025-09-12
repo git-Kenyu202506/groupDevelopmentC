@@ -6,7 +6,6 @@ public class Employee {
 	private int id;
 	private String name;
 	private String password;
-	private String password_check;
 	private int age;
 	private LocalDate startDate;
 	private LocalDate endDate;
@@ -75,13 +74,5 @@ public class Employee {
 
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
-	}
-
-	public String getPassword_check() {
-		return password_check;
-	}
-
-	public void setPassword_check(String password_check) {
-		this.password_check = password_check;
 	}
 }
