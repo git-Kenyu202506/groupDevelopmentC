@@ -28,13 +28,14 @@ public class RegisterService {
 	public boolean isPasswordMatching(Employee employee) {
 		return employee.getPassword() != null && employee.getPassword().equals(employee.getPassword_check());
 	}
+	
 
 	public boolean isPasswordPatternValid(Employee employee) {
 		if (employee.getPassword() == null) {
 			return false;
 		}
-		//  1つずつ数字を含む半角英数字のみ
-		return employee.getPassword().matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$");
+		//  1つずつ数字を含む8文字以上の半角英数字のみ
+		return employee.getPassword().matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 	}
 	// 年齢は数字のみ？
 }

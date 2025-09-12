@@ -68,14 +68,16 @@ public class RegisterController {
 		}
 		// パスワードのフォーマット確認
 		if (!service.isPasswordPatternValid(employee)) {
-			m.addAttribute("passwordFormError", "パスワードは半角英数字を含めてください");
+			m.addAttribute("passwordFormError", "パスワードは半角英数字を含めた8文字以上で入力してください");
 			return "insertForm";
 		}
+	
 		// パスワードの一致確認
 		if (!service.isPasswordMatching(employee)) {
 			m.addAttribute("passwordUnmatch", "パスワードが一致しません。");
 			return "insertForm";
 		}
+		m.addAttribute("Employee", employee);
 		return "insert_check";
 	}
 
@@ -108,7 +110,13 @@ public class RegisterController {
 		m.addAttribute("loginDateTime", loginDateTime);
 		return "mainMenu";
 	}
-	
+
+	@PostMapping("/backInsertForm")
+	public String backInsertForm(@ModelAttribute("Employee") Employee employee, Model m) {
+		m.addAttribute("Employee", employee);
+		return "insertForm";
+	}
+
 	// メインメニュー画面に転移(菅原さんファイル参照)
 	@RequestMapping("/backMainMenu")
 	public String backMainMenu(Model m, HttpSession session) {
