@@ -59,13 +59,13 @@
 				<div th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
 			</div> <br>
 			<div class="input_line">
-				<label>パスワード</label> <input type="password" name="password" th:field="*{password}" minlength="8"
+				<label>パスワード</label> <input type="password" name="password" th:field="*{password}"
 					oninput="validatePassInput(this)" title="半角英数字で入力して下さい。" required>
 				<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 			</div><br>
 			<div class="input_line">
 				<label>パスワード確認</label> <input type="password" name="password_check" th:field="*{password_check}"
-					minlength="8" oninput="validatePassInput(this)" title="半角英数字で入力して下さい。" required>
+					oninput="validatePassInput(this)" title="半角英数字で入力して下さい。" required>
 				<div th:if="${#fields.hasErrors('password_check')}" th:errors="*{password_check}"></div>
 			</div><br>
 
