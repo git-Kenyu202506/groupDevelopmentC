@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +33,7 @@ public class DeleteController {
 
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
-		m.addAttribute("Employee", new Employee());
-		
+
 		return "deleteForm";
 	}
 
@@ -84,6 +85,51 @@ public class DeleteController {
 		service.delete(numId);
 		m.addAttribute("msg", "社員情報の削除が完了しました");
 		return "delete_result";
+	}
+
+	// メインメニュー画面に転移(菅原さんファイル参照)
+	@GetMapping("/backToMainMenu")
+	public String backToMainMenu(Model m, HttpSession session) {
+
+		//ログイン情報のセッションを取得
+		Integer id = (Integer) session.getAttribute("id");
+		String name = (String) session.getAttribute("name");
+		String loginDateTime = (String) session.getAttribute("loginDateTime");
+
+		m.addAttribute("name", name);
+		m.addAttribute("loginDateTime", loginDateTime);
+		return "mainMenu";
+	}
+
+	@PostMapping("/backDeleteForm")
+	public String backdeleteForm(@ModelAttribute("Employee") Employee employee, Model m) {
+		m.addAttribute("Employee", employee);
+		return "deleteForm";
+	}
+
+	// メインメニュー画面に転移(菅原さんファイル参照)
+	@RequestMapping("/backMainMenu")
+	public String backMainMenu(Model m, HttpSession session) {
+
+		//ログイン情報のセッションを取得
+		Integer id = (Integer) session.getAttribute("id");
+		String name = (String) session.getAttribute("name");
+		String loginDateTime = (String) session.getAttribute("loginDateTime");
+
+		m.addAttribute("name", name);
+		m.addAttribute("loginDateTime", loginDateTime);
+		return "mainMenu";
+	}
+	@RequestMapping("/seachEmployee")
+	public String seachEmployee(HttpSession session, Model m) {
+
+		String name = (String) session.getAttribute("name");
+		String loginDateTime = (String) session.getAttribute("loginDateTime");
+
+		m.addAttribute("name", name);
+		m.addAttribute("loginDateTime", loginDateTime);
+
+		return "seachEmployee";
 	}
 
 }
