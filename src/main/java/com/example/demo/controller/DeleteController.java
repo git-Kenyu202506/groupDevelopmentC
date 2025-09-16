@@ -29,7 +29,6 @@ public class DeleteController {
 			BindingResult bindingResult, HttpSession session, Model m) {
 
 		Integer loginUserId = (Integer) session.getAttribute("id");
-
 		String name = (String) session.getAttribute("name");
 		String loginDateTime = (String) session.getAttribute("loginDateTime");
 
