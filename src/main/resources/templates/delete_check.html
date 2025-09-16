@@ -12,14 +12,12 @@
 <body>
 
 	<header>
-		<h1>社員情報削除（確認）</h1>
+		<h1>社員情報削除（入力）</h1>
 		<div class="session">
-			<p>ログイン者名 <span th:text="${name}"></span></p>
-			<div class="login_time">
-				<p>ログイン日時<span th:text="${date}"></span></p>
-				<p>ログイン時間<span th:text="${time}"></span></p>
-			</div>
-			</div>
+			<p><span th:text="${name} ?: '未ログイン'"></span>さん</p>
+			</div＞ class="login_time">
+			<p><span th:text="${loginDateTime} ?: '---'"></span></p>
+		</div>
 	</header>
 
 	<main>
