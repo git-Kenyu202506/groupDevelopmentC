@@ -22,13 +22,13 @@ public class DeleteController {
 
 	@Autowired
 	private DeleteService service;
-	@Autowired
-	private HttpSession session;
 
 	//削除するID確認
 	@PostMapping("/delete_check")
 	public String delete_check(@Validated Employee employee,
 			BindingResult bindingResult, HttpSession session, Model m) {
+
+		Integer loginUserId = (Integer) session.getAttribute("id");
 
 		String name = (String) session.getAttribute("name");
 		String loginDateTime = (String) session.getAttribute("loginDateTime");
@@ -50,16 +50,12 @@ public class DeleteController {
 			return "deleteForm";
 		}
 
-		//		if (!employee.isIdPatternValid()) {
-		//			model.addAttribute("idFormError", "入力されたIDの情報が存在しません");
-		//			return "deleteForm";
-		//		}
 		// ログインしているユーザーの情報は削除できない ログイン中のid情報を取得し
 
-		//		if (service.loginUserDeleteError(employee.getId(),sessionUser.getId())) {
-		//			m.addAttribute("recordEmptyDeleteError", "ログイン中のユーザーは削除できません。");
-		//			return "deleteForm";
-		//		}
+		if (loginUserId != null && service.loginUserDeleteError(employee.getId(), loginUserId)) {
+			m.addAttribute("recordEmptyDeleteError", "ログイン中のユーザーは削除できません。");
+			return "deleteForm";
+		}
 		return "delete_check";
 	}
 
