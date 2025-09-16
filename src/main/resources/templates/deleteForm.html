@@ -28,12 +28,12 @@
 	</header>
 
 
+
 	<main>
 		<form action="/employee/delete_check" th:object="${Employee}" method="post">
 			<div class="input_line">
 				<label> 社員ID</label>
-				<input type="text" name="id" th:value="${Employee.id == 0 ? '': Employee.id}"
-					oninput="validateNumberInput(this)" title="社員IDを入力して下さい。" required>
+				<input type="text" name="id" oninput="validateNumberInput(this)" title="社員IDを入力して下さい。" required>
 			</div>
 			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
 			<div class="buttons">

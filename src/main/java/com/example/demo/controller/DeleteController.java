@@ -28,11 +28,13 @@ public class DeleteController {
 	@RequestMapping("/deleteForm")
 	public String deleteFrom(HttpSession session, Model m) {
 
+		//Integer id = (Integer) session.getAttribute("id");
 		String name = (String) session.getAttribute("name");
 		String loginDateTime = (String) session.getAttribute("loginDateTime");
 
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
+		m.addAttribute("Employee", new Employee());
 
 		return "deleteForm";
 	}
@@ -120,6 +122,7 @@ public class DeleteController {
 		m.addAttribute("loginDateTime", loginDateTime);
 		return "mainMenu";
 	}
+
 	@RequestMapping("/seachEmployee")
 	public String seachEmployee(HttpSession session, Model m) {
 
