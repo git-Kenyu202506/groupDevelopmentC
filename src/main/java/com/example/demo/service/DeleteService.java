@@ -29,11 +29,9 @@ public class DeleteService {
 	}
 
 	//
-	public boolean loginUserDeleteError(Employee employee, Employee sessionUser) {
+	public boolean loginUserDeleteError(int employeeId, int sessionUserId) {
 		//sessionにある値と照合し一致すればfalseを返す
-		if (employee != null && sessionUser != null) {
-			return employee.getId() == (sessionUser.getId());
-		}
-		return false;
+			return employeeId == sessionUserId;
+		
 	}
 }
