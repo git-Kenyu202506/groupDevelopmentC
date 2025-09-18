@@ -133,7 +133,15 @@ form p.check_msg {
 }
 
 .buttons {
-	width: 800px;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
 	padding-top: 30px;
 	border-top: 1px black solid;
+}
+
+.container {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
 }
