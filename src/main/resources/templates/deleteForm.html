@@ -24,6 +24,18 @@
 						input.value = input.value.replace(/[^0-9]/g, "");
 					}
 				</script>
+				<script th:if="${idNull != null}">
+					alert('[[${idNull}]]');
+				</script>
+				<script th:if="${nullDeleteError != null}">
+					alert('[[${nullDeleteError}]]');
+				</script>
+				<script th:if="${recordEmptyDeleteError != null}">
+					alert('[[${recordEmptyDeleteError}]]');
+				</script>
+				<script th:if="${loginUserDeleteError != null}">
+					alert('[[${loginUserDeleteError}]]');
+				</script>
 			</div>
 		</div>
 	</header>
@@ -34,8 +46,8 @@
 		<form th:action="@{/employee/delete_check}" th:object="${Employee}" method="post">
 			<div class="input_line">
 				<label> 社員ID</label>
-				<input type="text" th:field="*{id}" oninput="validateNumberInput(this)" title="社員IDを入力して下さい。"
-					required>
+				<input type="text" name="id" oninput="validateNumberInput(this)"
+					th:value="${Employee.id == 0 ? '': Employee.id}" title="社員IDを入力して下さい。" required>
 			</div>
 			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
 			<div class="buttons">

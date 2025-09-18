@@ -32,15 +32,16 @@
 			<p class="check_msg">こちらを削除します。よろしいですか？</p>
 		</div>
 		<div class="buttons">
-			<form th:action="@{/employee/delete}" method="post">
+			<form th:action="@{/employee/delete}" th:object="${Employee}" method="post">
 				<input type="hidden" th:field="*{id}">
 				<input type="submit" value="削除" class="input_button orange_button">
 			</form>
-			<form th:action="@{/employee/backDeleteForm}" method="post" class="post_button">
+
+			<form th:action="@{/employee/backDeleteForm}" th:object="${Employee}" method="post" class="post_button">
 				<input type="hidden" th:field="*{id}">
 				<input type="submit" value="戻る" class="input_button">
+			</form>
 		</div>
-		</form>
 
 
 
