@@ -23,15 +23,15 @@ public class DeleteService {
 	public boolean recordEmptyDeleteError(Employee employee) {
 		//テーブルの中に一致するものを探してnullならエラー 
 		if (employee == null || employee.getId() == 0) {
-			return true;
+			return false;
 		}
-		return false;
+		Employee dbEmployee = mapper.findById(employee.getId());
+		return dbEmployee != null;
 	}
 
 	//
 	public boolean loginUserDeleteError(int employeeId, int sessionUserId) {
 		//sessionにある値と照合し一致すればfalseを返す
-			return employeeId == sessionUserId;
-		
+		return employeeId == sessionUserId;
 	}
 }
