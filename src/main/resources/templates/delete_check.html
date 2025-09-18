@@ -23,13 +23,14 @@
 
 	<main>
 
-		<div class="delete_line">
-
-			<div class="input_line">
-				<label>社員ID</label> <span th:text="${Employee.id} ?: 'null'"></span>
+		<div class="container">
+			<div class="delete_info">
+				<div class="input_line">
+					<label>社員ID</label> <span th:text="${Employee.id} ?: 'null'"></span>
+				</div>
+				<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
+				<p class="check_msg">こちらを削除します。よろしいですか？</p>
 			</div>
-			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
-			<p class="check_msg">こちらを削除します。よろしいですか？</p>
 		</div>
 		<div class="buttons">
 			<form th:action="@{/employee/delete}" th:object="${Employee}" method="post">
