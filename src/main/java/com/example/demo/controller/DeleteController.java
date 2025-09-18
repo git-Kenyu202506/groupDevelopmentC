@@ -47,13 +47,14 @@ public class DeleteController {
 
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
+		m.addAttribute("Employee", employee);
 
 		//入力エラーがあれば入力フォームに転移
 		if (bindingResult.hasErrors()) {
 			return "deleteForm";
 		}
 		if (!service.nullDeleteError(employee)) {
-			m.addAttribute("idnull", "IDを入力してください");
+			m.addAttribute("idNull", "IDを入力してください");
 			return "deleteForm";
 		}
 		// 入力されたIDが存在しないエラー
@@ -64,7 +65,7 @@ public class DeleteController {
 
 		// ログインしているユーザーの情報は削除できない ログイン中のid情報を取得し
 		if (loginUserId != null && service.loginUserDeleteError(employee.getId(), loginUserId)) {
-			m.addAttribute("recordEmptyDeleteError", "ログイン中のユーザーは削除できません。");
+			m.addAttribute("loginUserDeleteError", "ログイン中のユーザーは削除できません。");
 			return "deleteForm";
 		}
 		return "delete_check";
