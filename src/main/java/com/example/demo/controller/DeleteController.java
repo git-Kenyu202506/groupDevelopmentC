@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Employee;
 import com.example.demo.service.DeleteService;
@@ -19,15 +18,27 @@ import com.example.demo.service.DeleteService;
 // http://localhost:8080/employee/deleteForm
 
 @Controller
-@RequestMapping("/employee")
 public class DeleteController {
 
 	@Autowired
 	private DeleteService service;
 
+	@RequestMapping("/employee/deleteForm")
+	public String showDeleteForm(Model model, HttpSession session) {
+
+		String name = (String) session.getAttribute("name");
+		String loginDateTime = (String) session.getAttribute("loginDateTime");
+		model.addAttribute("name", name);
+		model.addAttribute("loginDateTime", loginDateTime);
+
+		model.addAttribute("Employee", new Employee());
+
+		return "deleteForm";
+	}
+
 	//削除するID確認
-	@PostMapping("/delete_check")
-	public String delete_check(@Validated Employee employee,
+	@PostMapping("/employee/delete_check")
+	public String delete_check(@Validated @ModelAttribute("Employee") Employee employee,
 			BindingResult bindingResult, HttpSession session, Model m) {
 
 		Integer loginUserId = (Integer) session.getAttribute("id");
@@ -60,8 +71,8 @@ public class DeleteController {
 	}
 
 	// 削除完了画面に転移
-	@PostMapping("/delete")
-	public String deleteEmployee(Model m, HttpSession session, @RequestParam("id") String id) {
+	@PostMapping("/employee/delete")
+	public String deleteEmployee(@ModelAttribute("Employee") Employee employee, Model m, HttpSession session) {
 
 		String name = (String) session.getAttribute("name");
 		String loginDateTime = (String) session.getAttribute("loginDateTime");
@@ -69,14 +80,13 @@ public class DeleteController {
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
 
-		int numId = Integer.parseInt(id);
-		service.delete(numId);
+		service.delete(employee.getId());
 		m.addAttribute("msg", "社員情報の削除が完了しました");
 		return "delete_result";
 	}
 
 	// メインメニュー画面に転移(菅原さんファイル参照)
-	@GetMapping("/backToMainMenu")
+	@GetMapping("/employee/backToMainMenu")
 	public String backToMainMenu(Model m, HttpSession session) {
 
 		//ログイン情報のセッションを取得
@@ -89,14 +99,14 @@ public class DeleteController {
 		return "mainMenu";
 	}
 
-	@PostMapping("/backDeleteForm")
+	@PostMapping("/employee/backDeleteForm")
 	public String backdeleteForm(@ModelAttribute("Employee") Employee employee, Model m) {
 		m.addAttribute("Employee", employee);
 		return "deleteForm";
 	}
 
 	// メインメニュー画面に転移(菅原さんファイル参照)
-	@RequestMapping("/backMainMenu")
+	@RequestMapping("/employee/backMainMenu")
 	public String backMainMenu(Model m, HttpSession session) {
 
 		//ログイン情報のセッションを取得
@@ -109,7 +119,7 @@ public class DeleteController {
 		return "mainMenu";
 	}
 
-	@RequestMapping("/seachEmployee")
+	@RequestMapping("/employee/seachEmployee")
 	public String seachEmployee(HttpSession session, Model m) {
 
 		String name = (String) session.getAttribute("name");

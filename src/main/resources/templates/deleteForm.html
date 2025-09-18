@@ -31,10 +31,10 @@
 
 
 	<main>
-		<form action="/employee/delete_check" th:object="${Employee}" method="post">
+		<form th:action="@{/employee/delete_check}" th:object="${Employee}" method="post">
 			<div class="input_line">
 				<label> 社員ID</label>
-				<input type="text" name="id" th:field="*{id}" oninput="validateNumberInput(this)" title="社員IDを入力して下さい。"
+				<input type="text" th:field="*{id}" oninput="validateNumberInput(this)" title="社員IDを入力して下さい。"
 					required>
 			</div>
 			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
