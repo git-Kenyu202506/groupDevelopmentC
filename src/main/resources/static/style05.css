@@ -36,16 +36,6 @@ main {
 	align-items: center;
 }
 
-.input_line_check {
-	width: 100%;
-	display: flex;
-	justify-content: flex-start;
-	text-align: left;
-	margin: 30px 0;
-	margin-left: 210px;
-}
-
-
 .input_line label,
 .input_line_check .label {
 	width: 200px;
@@ -71,8 +61,7 @@ main {
 	margin: 0 50px;
 }
 
-.container,
-.insert_result {
+.container{
 	width: 800px;
 	height: 600px;
 	margin: 0 auto;
@@ -87,14 +76,14 @@ p.copyright {
 	justify-content: end;
 }
 
-form p.check_msg {
+form p .check_msg {
 	width: 100%;
 	text-align: center;
 	display: block;
 	padding-top: 5px;
 }
 
-.insert_result p.result_msg {
+.result_msg {
 	font-size: large;
 	font-weight: bold;
 	margin: 150px;
@@ -127,15 +116,10 @@ form p.check_msg {
 	background-color: #ddd;
 }
 
-.result_buttons .input_button_like {
+.input_button_like {
 	width: 200px;
 	height: 30px;
 	margin: 0 200px;
-}
-
-.result_buttons {
-	display: flex;
-	justify-content: center;
 }
 
 .delete_line {
