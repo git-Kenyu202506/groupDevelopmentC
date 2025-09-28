@@ -101,7 +101,14 @@ public class DeleteController {
 	}
 
 	@PostMapping("/employee/backDeleteForm")
-	public String backdeleteForm(@ModelAttribute("Employee") Employee employee, Model m) {
+	public String backdeleteForm(@ModelAttribute("Employee") Employee employee, Model m,HttpSession session ) {
+		
+		Integer id = (Integer) session.getAttribute("id");
+		String name = (String) session.getAttribute("name");
+		String loginDateTime = (String) session.getAttribute("loginDateTime");
+
+		m.addAttribute("name", name);
+		m.addAttribute("loginDateTime", loginDateTime);
 		m.addAttribute("Employee", employee);
 		return "deleteForm";
 	}
