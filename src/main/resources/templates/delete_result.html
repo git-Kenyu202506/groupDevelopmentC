@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>社員情報削除（完了）</title>
-	<link rel="stylesheet" href="/style0305.css">
+	<link rel="stylesheet" href="/style05.css">
 </head>
 
 <body>
@@ -22,14 +22,20 @@
 
 
 	<main>
-		<div class="delete_result">
-			<p class="result_msg" th:text="${msg}"></p>
+		<div class="container">
+			<div class="delete_result">
+				<div class="delete_result_contain">
+					<p class="result_msg" th:text="${msg}"></p>
 
-			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
+					<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
 
-			<div class="result_button">
-				<a th:href="@{/employee/backToMainMenu}" class="input_button_like">メニュー</a>
-				<a th:href="@{/employee/seachEmployee}" class="input_button_like orange_button">検索へ</a>
+					<div class="buttons">
+						<div class="result_button">
+							<a th:href="@{/employee/backToMainMenu}" class="input_button_like">メニュー</a>
+							<a th:href="@{/employee/seachEmployee}" class="input_button_like orange_button">検索へ</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</main>
