@@ -71,7 +71,7 @@ public class RegisterController {
 			m.addAttribute("passwordFormError", "パスワードは半角英数字を含めた8文字以上で入力してください");
 			return "insertForm";
 		}
-	
+
 		// パスワードの一致確認
 		if (!service.isPasswordMatching(employee)) {
 			m.addAttribute("passwordUnmatch", "パスワードが一致しません。");
@@ -131,9 +131,9 @@ public class RegisterController {
 		return "mainMenu";
 	}
 
-	// 検索画面に転移(菅原さんファイル参照)
-	@GetMapping("/searchEmployee")
-	public String ConditionSearch(HttpSession session, Model m) {
+	// ダミー検索画面に転移
+	@GetMapping("/searchDummyEmployee")
+	public String showSearchForm(HttpSession session, Model m) {
 
 		//ログイン情報のセッションを取得
 		String name = (String) session.getAttribute("name");
@@ -142,6 +142,6 @@ public class RegisterController {
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
 
-		return "searchEmployee";
+		return "searchDummyEmployee";
 	}
 }
