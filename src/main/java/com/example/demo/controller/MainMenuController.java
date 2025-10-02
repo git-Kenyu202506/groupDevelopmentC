@@ -15,46 +15,55 @@ public class MainMenuController {
 
 	@Autowired
 	private HttpSession session;
-
+	
 	@RequestMapping("/employee/mainMenu")
 	public String showMainMenu(Model m) {
-
+		
 		//ログイン情報のセッションを取得
 		String id = (String) session.getAttribute("id");
 		String name = (String) session.getAttribute("name");
 		String loginDateTime = (String) session.getAttribute("loginDateTime");
-
+		
 		m.addAttribute("id", id);
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
-
+		
 		return "mainMenu";
 	}
-
+	
+	
 	//社員情報登録画面へ遷移
-	@GetMapping("/employee/register")
-	public String showRegister() {
-		return "register";
+	@RequestMapping("/insertForm")
+	public String insertForm(Model model) {
+		model.addAttribute("Employee", new Employee());
+		return "insertForm";
 	}
-
+	
 	//社員情報削除（入力）画面へ遷移
-	@GetMapping("/employee/deleteForm")
-	public String deleteFrom(HttpSession session, Model m) {
-
-		//Integer id = (Integer) session.getAttribute("id");
-		String name = (String) session.getAttribute("name");
-		String loginDateTime = (String) session.getAttribute("loginDateTime");
-
-		m.addAttribute("name", name);
-		m.addAttribute("loginDateTime", loginDateTime);
-		m.addAttribute("Employee", new Employee());
-
-		return "deleteForm";
+	@GetMapping("/employee/deleteInsert")
+	public String showDelete() {
+		return "deleteInsert";
 	}
-
+	
 	//社員情報更新（社員ID入力）画面
 	@GetMapping("/employee/update")
 	public String showUpdate() {
 		return "updateInsert";
 	}
+//		// 検索画面に転移(菅原さんファイル参照)
+//		@GetMapping("/searchEmployee")
+//		public String ConditionSearch(HttpSession session, Model m) {
+//		// ダミー検索画面に転移
+//	 
+//	 		//ログイン情報のセッションを取得
+//	 		String name = (String) session.getAttribute("name");
+//	 		
+//	 		m.addAttribute("name", name);
+//	 		m.addAttribute("loginDateTime", loginDateTime);
+//	 
+//			return "searchEmployee";
+//			return "searchDummyEmployee";
+
+
+	
 }
