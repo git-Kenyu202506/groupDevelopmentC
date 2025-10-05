@@ -42,7 +42,8 @@ public class RegisterController {
 
 	//入力された情報の確認画面
 	@PostMapping("/insert_check")
-	public String insert_check(@ModelAttribute("Employee") @Validated Employee employee,
+	public String insert_check(
+			@ModelAttribute("Employee") @Validated Employee employee,
 			BindingResult bindingResult,
 			HttpSession session,
 			Model m) {
@@ -52,32 +53,38 @@ public class RegisterController {
 
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
+		m.addAttribute("Employee", employee);
 
-		if (bindingResult.hasErrors()) {
-			return "insertForm";
-		}
 		//社員名の入力チェック
 		if (!service.isNameInputValid(employee)) {
 			m.addAttribute("nameNull", "社員名を入力してください");
 			return "insertForm";
 		}
-		//年齢の入力チェック&有効な数字かのチェック
+
 		if (!service.isAgeInputValid(employee)) {
 			m.addAttribute("ageNull", "有効な年齢を入力してください");
 			return "insertForm";
 		}
+
 		// パスワードのフォーマット確認
 		if (!service.isPasswordPatternValid(employee)) {
 			m.addAttribute("passwordFormError", "パスワードは半角英数字を含めた8文字以上で入力してください");
 			return "insertForm";
 		}
-
+		if (!service.isPasswordInputValid(employee)) {
+			m.addAttribute("passwordNull", "社員名を入力してください");
+			return "insertForm";
+		}
 		// パスワードの一致確認
 		if (!service.isPasswordMatching(employee)) {
 			m.addAttribute("passwordUnmatch", "パスワードが一致しません。");
 			return "insertForm";
 		}
-		m.addAttribute("Employee", employee);
+		if (!service.isPasswordCheckInputValid(employee)) {
+			m.addAttribute("password_checkNull", "社員名を入力してください");
+			return "insertForm";
+		}
+
 		return "insert_check";
 	}
 

@@ -11,7 +11,7 @@ public class RegisterService {
 
 	@Autowired
 	private RegisterMapper mapper;
-	
+
 	Employee employee = new Employee();
 
 	public void insert(Employee employee) {
@@ -19,23 +19,35 @@ public class RegisterService {
 	}
 
 	public boolean isNameInputValid(Employee employee) {
-		return employee.getName()!= null;
+		String name = employee.getName();
+		return name != null && !name.trim().isEmpty();
 	}
+
 	public boolean isAgeInputValid(Employee employee) {
 		return employee.getAge() > 0;
 	}
-	
-	public boolean isPasswordMatching(Employee employee) {
-		return employee.getPassword() != null && employee.getPassword().equals(employee.getPassword_check());
-	}
-	
 
-	public boolean isPasswordPatternValid(Employee employee) {
-		if (employee.getPassword() == null) {
+	public boolean isPasswordInputValid(Employee employee) {
+		return employee.getPassword() != null && !employee.getPassword().trim().isEmpty();
+	}
+
+	public boolean isPasswordCheckInputValid(Employee employee) {
+		return employee.getPassword_check() != null && !employee.getPassword_check().trim().isEmpty();
+	}
+
+	public boolean isPasswordMatching(Employee employee) {
+		if (employee.getPassword() == null || employee.getPassword_check() == null) {
 			return false;
 		}
-		//  1つずつ数字を含む8文字以上の半角英数字のみ
-		return employee.getPassword().matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+		return employee.getPassword().equals(employee.getPassword_check());
 	}
-	// 年齢は数字のみ？
+
+	public boolean isPasswordPatternValid(Employee employee) {
+		String pass = employee.getPassword();
+		if (pass == null)
+			return false;
+		//  1つずつ数字を含む8文字以上の半角英数字のみ
+		return pass.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+	}
+
 }
