@@ -19,11 +19,13 @@
 			<p><span th:text="${name} ?: '未ログイン'"></span>さん</p>
 			<div class="login_time">
 				<p><span th:text="${loginDateTime} ?: '---'"></span></p>
+				<!--
 				<script>
 					function validateNumberInput(input) {
 						input.value = input.value.replace(/[^0-9]/g, "");
 					}
 				</script>
+				-->
 				<script th:if="${idNull != null}">
 					alert('[[${idNull}]]');
 				</script>
@@ -48,8 +50,7 @@
 				<div class="form_top">
 					<div class="input_line">
 						<label> 社員ID</label>
-						<input type="text" name="id" oninput="validateNumberInput(this)"
-							th:value="${Employee.id == 0 ? '': Employee.id}" title="社員IDを入力して下さい。" required>
+						<input type="text" name="id" th:value="${Employee.id == 0 ? '': Employee.id}">
 					</div>
 					<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
 				</div>
