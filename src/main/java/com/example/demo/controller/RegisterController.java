@@ -65,23 +65,22 @@ public class RegisterController {
 			m.addAttribute("ageNull", "有効な年齢を入力してください");
 			return "insertForm";
 		}
-
+		if (!service.isPasswordInputValid(employee)) {
+			m.addAttribute("passwordNull", "パスワードを入力してください");
+			return "insertForm";
+		}
 		// パスワードのフォーマット確認
 		if (!service.isPasswordPatternValid(employee)) {
 			m.addAttribute("passwordFormError", "パスワードは半角英数字を含めた8文字以上で入力してください");
 			return "insertForm";
 		}
-		if (!service.isPasswordInputValid(employee)) {
-			m.addAttribute("passwordNull", "社員名を入力してください");
+		if (!service.isPasswordCheckInputValid(employee)) {
+			m.addAttribute("password_checkNull", "確認用のパスワードを入力してください");
 			return "insertForm";
 		}
 		// パスワードの一致確認
 		if (!service.isPasswordMatching(employee)) {
 			m.addAttribute("passwordUnmatch", "パスワードが一致しません。");
-			return "insertForm";
-		}
-		if (!service.isPasswordCheckInputValid(employee)) {
-			m.addAttribute("password_checkNull", "社員名を入力してください");
 			return "insertForm";
 		}
 
@@ -119,7 +118,13 @@ public class RegisterController {
 	}
 
 	@PostMapping("/backInsertForm")
-	public String backInsertForm(@ModelAttribute("Employee") Employee employee, Model m) {
+	public String backInsertForm(@ModelAttribute("Employee") Employee employee, HttpSession session, Model m) {
+
+		String name = (String) session.getAttribute("name");
+		String loginDateTime = (String) session.getAttribute("loginDateTime");
+
+		m.addAttribute("name", name);
+		m.addAttribute("loginDateTime", loginDateTime);
 		m.addAttribute("Employee", employee);
 		return "insertForm";
 	}
