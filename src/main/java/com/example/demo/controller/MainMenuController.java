@@ -16,7 +16,7 @@ public class MainMenuController {
 	@Autowired
 	private HttpSession session;
 	
-	@RequestMapping("/employee/mainMenu")
+	@RequestMapping("/employee/MainMenu")
 	public String showMainMenu(Model m) {
 		
 		//ログイン情報のセッションを取得
@@ -28,7 +28,7 @@ public class MainMenuController {
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
 		
-		return "mainMenu";
+		return "MainMenu";
 	}
 	
 	
