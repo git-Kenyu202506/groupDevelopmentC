@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.DeleteService;
 
-// http://localhost:8080/employee/deleteForm
-
 @Controller
 public class DeleteController {
 
@@ -42,7 +40,7 @@ public class DeleteController {
 		return "deleteForm";
 	}
 
-	@RequestMapping("employee/employee/someDeleteForm")
+	@RequestMapping("/someDeleteForm")
 	public String showSomeDeleteForm(@RequestParam(value = "id", required = false) List<Integer> ids, Model m,
 			HttpSession session) {
 
@@ -132,12 +130,7 @@ public class DeleteController {
 			}
 
 			if (!service.recordEmptyDeleteError(employee)) {
-				m.addAttribute("recordSameDeleteError", "レコードに存在しないIDが含まれています:");
-				return "someDeleteForm";
-			}
-
-			if (!service.recordEmptyDeleteError(employee)) {
-				m.addAttribute("recordEmptyDeleteError", "レコードに存在しないIDが含まれています:");
+				m.addAttribute("recordEmptyDeleteError", "レコードに存在しないIDが含まれています:" + id);
 				return "someDeleteForm";
 			}
 
