@@ -12,42 +12,44 @@ public class RegisterService {
 	@Autowired
 	private RegisterMapper mapper;
 
-	Employee employee = new Employee();
-
 	public void insert(Employee employee) {
 		mapper.insert(employee);
 	}
 
+	//社員名の入力チェック
 	public boolean isNameInputValid(Employee employee) {
 		String name = employee.getName();
 		return name != null && !name.trim().isEmpty();
 	}
 
+	//年齢の入力チェック(Entityでint型で定義のため 0以下の数字をnullとして扱う)
 	public boolean isAgeInputValid(Employee employee) {
 		return employee.getAge() > 0;
 	}
 
+	//パスワードの入力チェック
 	public boolean isPasswordInputValid(Employee employee) {
-		return employee.getPassword() != null && !employee.getPassword().trim().isEmpty();
+		String pass = employee.getPassword();
+		return pass != null && !pass.trim().isEmpty();
 	}
 
+	//確認用パスワードの入力チェック
 	public boolean isPasswordCheckInputValid(Employee employee) {
-		return employee.getPassword_check() != null && !employee.getPassword_check().trim().isEmpty();
+		String passCheck = employee.getPassword_check();
+		return passCheck != null && !passCheck.trim().isEmpty();
 	}
 
+	// パスワードの一致確認
 	public boolean isPasswordMatching(Employee employee) {
-		if (employee.getPassword() == null || employee.getPassword_check() == null) {
-			return false;
-		}
-		return employee.getPassword().equals(employee.getPassword_check());
+		String pass = employee.getPassword();
+		String passCheck = employee.getPassword_check();
+		return pass != null && pass.equals(passCheck);
 	}
 
+	//  1つずつ数字を含む8文字以上の半角英数字のみ(英語大文字必須)
 	public boolean isPasswordPatternValid(Employee employee) {
 		String pass = employee.getPassword();
-		if (pass == null)
-			return false;
-		//  1つずつ数字を含む8文字以上の半角英数字のみ
-		return pass.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+		return pass != null && pass.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 	}
 
 }

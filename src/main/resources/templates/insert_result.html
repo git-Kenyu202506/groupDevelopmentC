@@ -6,11 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>社員登録情報（入力）</title>
 	<link rel="stylesheet" th:href="@{/style03.css}">
-	<script>
-		function validateNumberInput(input) {
-			input.value = input.value.replace(/[^0-9]/g, "");
-		}
-	</script>
+
 </head>
 
 <body>
@@ -18,9 +14,9 @@
 	<header>
 		<h1>社員登録情報（完了）</h1>
 		<div class="session">
-			<p><span th:text="${name}">菅原</span>さん</p>
+			<p><span th:text="${name} ?: '未ログイン'"></span>さん</p>
 			<div class="login_time">
-				<p><span th:text="${loginDateTime}">2025/08/19 19:00</span></p>
+				<p><span th:text="${loginDateTime} ?: '---'"></span></p>
 			</div>
 		</div>
 	</header>
