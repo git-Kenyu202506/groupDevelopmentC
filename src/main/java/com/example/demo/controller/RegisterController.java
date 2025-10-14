@@ -130,7 +130,7 @@ public class RegisterController {
 	}
 
 	// メインメニュー画面に転移(菅原さんファイル参照)
-	@RequestMapping("/backMainMenu")
+	@RequestMapping("/backMainMenuFromInsert")
 	public String backMainMenu(Model m, HttpSession session) {
 
 		//ログイン情報のセッションを取得

@@ -41,8 +41,8 @@ public class RegisterService {
 
 	// パスワードの一致確認
 	public boolean isPasswordMatching(Employee employee) {
-		String pass = employee.getPassword();
-		String passCheck = employee.getPassword_check();
+		String pass = employee.getPassword_check();
+		String passCheck = employee.getPassword();
 		return pass != null && pass.equals(passCheck);
 	}
 

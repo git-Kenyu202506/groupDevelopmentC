@@ -33,7 +33,7 @@ public class MainMenuController {
 	
 	
 	//社員情報登録画面へ遷移
-	@RequestMapping("/insertForm")
+	@GetMapping("/insertForm")
 	public String insertForm(Model model) {
 		model.addAttribute("Employee", new Employee());
 		return "insertForm";

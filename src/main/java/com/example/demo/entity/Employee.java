@@ -9,11 +9,12 @@ public class Employee {
 	private int age;
 	private LocalDate startDate;
 	private LocalDate endDate;
-	
-	
+	private String password_check;
+
 	//デフォルトコンストラクタ
-	public Employee() {}
-	
+	public Employee() {
+	}
+
 	//コンストラクタ
 	public Employee(int id, String name, String password, int age, LocalDate startDate, LocalDate endDate) {
 		this.id = id;
@@ -23,11 +24,11 @@ public class Employee {
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
-	
-	public Employee(int id,String name,String password) {
-		this.id=id;
-		this.name=name;
-		this.password=password;
+
+	public Employee(int id, String name, String password) {
+		this.id = id;
+		this.name = name;
+		this.password = password;
 	}
 
 	//Getter・Setter
@@ -77,5 +78,13 @@ public class Employee {
 
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getPassword_check() {
+		return password_check;
+	}
+
+	public void setPassword_check(String password_check) {
+		this.password_check = password_check;
 	}
 }
