@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>社員情報削除（確認）</title>
+	<link rel="stylesheet" href="/style05.css">
+
+</head>
+
+<body>
+
+	<header>
+		<h1>社員情報削除（確認）</h1>
+		<div class="session">
+			<p><span th:text="${name} ?: '未ログイン'"></span>さん</p>
+			<div class="login_time">
+				<p><span th:text="${loginDateTime} ?: '---'"></span></p>
+			</div>
+		</div>
+	</header>
+
+	<main>
+
+		<div class="form_column">
+			<div class="delete_info">
+				<div th:each="id : ${ids}" class="input_line">
+					<label>社員ID</label> <span th:text="${id}"></span>
+					<input type="hidden" name="id" th:value="${id}">
+				</div>
+
+				<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
+				<p class="check_msg">こちらを削除します。よろしいですか？</p>
+			</div>
+			<div class="buttons">
+				<form th:action="@{/employee/someDelete}" th:object="${Employee}" method="post">
+					<div th:each="id : ${ids}">
+						<input type="hidden" name="id" th:value="${id}">
+					</div>
+					<input type="submit" value="削除" class="input_button orange_button">
+				</form>
+
+				<form th:action="@{/employee/backSomeDeleteForm}" method="post" class="post_button">
+					<div th:each="id : ${ids}">
+						<input type="hidden" name="id" th:value="${id}">
+					</div>
+					<input type="submit" value="戻る" class="input_button">
+				</form>
+			</div>
+		</div>
+	</main>
+
+</body>
+
+</html>

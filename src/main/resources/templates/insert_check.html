@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>社員登録情報（確認）</title>
+	<link rel="stylesheet" th:href="@{/style03.css}">
+</head>
+
+<body>
+
+	<header>
+		<h1>社員登録情報（確認）</h1>
+		<div class="session">
+			<p><span th:text="${name} ?: '未ログイン'"></span>さん</p>
+			<div class="login_time">
+				<p><span th:text="${loginDateTime} ?: '---'"></span></p>
+			</div>
+		</div>
+	</header>
+
+	<div>
+		<div class="container">
+			<div class="insert_info">
+				<div class="input_line_check">
+					<span class="label">社員名</span> <span th:text="${Employee.name}"></span><br>
+				</div>
+				<div class="input_line_check">
+					<span class="label">年齢</span> <span th:text="${Employee.age}"></span><br>
+				</div>
+				<div class="input_line_check">
+					<span class="label">パスワード</span> <span
+						th:text="${#strings.repeat('⚫︎',Employee.password.length())}"></span><br>
+				</div>
+				<div class="input_line_check">
+					<span class="label">パスワード確認</span> <span
+						th:text="${#strings.repeat('⚫︎',Employee.password_check.length())}"></span><br>
+				</div>
+				<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
+				<p class="check_msg">これで登録します。よろしいですか？</p>
+
+			</div>
+
+			<div class="buttons">
+				<form action="/employee/insert" th:object="${Employee}" method="post">
+					<input type="hidden" th:field="*{name}">
+					<input type="hidden" th:field="*{age}">
+					<input type="hidden" th:field="*{password}">
+					<input type="hidden" th:field="*{password_check}">
+					<input type="submit" value="登録" class="input_button orange_button">
+				</form>
+				<form action="/employee/backInsertForm" th:object="${Employee}" method="post">
+					<input type="hidden" th:field="*{name}">
+					<input type="hidden" th:field="*{age}">
+					<input type="hidden" th:field="*{password}">
+					<input type="hidden" th:field="*{password_check}">
+					<input type="submit" value="戻る" class="input_button">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	</main>
+
+
+
+</body>
+
+</html>

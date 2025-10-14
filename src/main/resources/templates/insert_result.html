@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>社員登録情報（入力）</title>
+	<link rel="stylesheet" th:href="@{/style03.css}">
+
+</head>
+
+<body>
+
+	<header>
+		<h1>社員登録情報（完了）</h1>
+		<div class="session">
+			<p><span th:text="${name} ?: '未ログイン'"></span>さん</p>
+			<div class="login_time">
+				<p><span th:text="${loginDateTime} ?: '---'"></span></p>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<div class="insert_result">
+			<p th:text="社員情報の登録が完了しました。" class="result_msg"></p>
+
+			<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
+			<div class="buttons">
+				<div class="result_buttons">
+					<a th:href="@{/employee/backToMainMenu}" class="input_button_like">メニュー</a>
+					<a th:href="@{/employee/searchDummyEmployee}" class="input_button_like orange_button">検索へ</a>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+
+</body>
+
+</html>

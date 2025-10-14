@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>複数社員情報削除（入力）</title>
+	<link rel="stylesheet" href="/style05.css">
+	<script src="/js/form-validator.js"></script>
+
+
+</head>
+
+<body>
+
+	<header>
+		<h1>社員情報削除（入力）</h1>
+		<div class="session">
+			<p><span th:text="${name} ?: '未ログイン'"></span>さん</p>
+			<div class="login_time">
+				<p><span th:text="${loginDateTime} ?: '---'"></span></p>
+				<script>
+					function validateNumberInput(input) {
+						input.value = input.value.replace(/[^0-9]/g, "");
+					}
+				</script>
+				<script th:if="${idNull != null}">
+					alert('[[${idNull}]]');
+				</script>
+				<script th:if="${nullDeleteError != null}">
+					alert('[[${nullDeleteError}]]');
+				</script>
+				<script th:if="${recordEmptyDeleteError != null}">
+					alert('[[${recordEmptyDeleteError}]]');
+				</script>
+				<script th:if="${loginUserDeleteError != null}">
+					alert('[[${loginUserDeleteError}]]');
+				</script>
+				<script th:if="${duplicateError != null}">
+					alert('[[${duplicateError}]]');
+				</script>
+			</div>
+		</div>
+	</header>
+
+
+
+	<main>
+		<div class="container">
+			<form th:action="@{/employee/someDelete_check}" th:object="${Employee}" method="post">
+				<div class="form_top">
+					<div class="input_line">
+						<label> 社員ID</label>
+						<input type="text" name="id" oninput="validateNumberInput(this)"
+							th:value="${ids != null and ids.size() > 0 ? ids[0] : ''}" title="社員IDを入力して下さい。">
+					</div>
+					<div class="input_line">
+						<label> 社員ID</label>
+						<input type="text" name="id" oninput="validateNumberInput(this)"
+							th:value="${ids != null and ids.size() > 1 ? ids[1] : ''}" title="社員IDを入力して下さい。">
+					</div>
+					<div class="input_line">
+						<label> 社員ID</label>
+						<input type="text" name="id" oninput="validateNumberInput(this)"
+							th:value="${ids != null and ids.size() > 2 ? ids[2] : ''}" title="社員IDを入力して下さい。">
+					</div>
+
+					<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
+				</div>
+				<div class="buttons">
+					<input type="submit" value="確認" class="input_button orange_button">
+					<a th:href="@{/employee/backMainMenu}" class="input_button_like">戻る</a>
+				</div>
+			</form>
+		</div>
+
+
+
+
+	</main>
+
+</body>
+
+</html>
