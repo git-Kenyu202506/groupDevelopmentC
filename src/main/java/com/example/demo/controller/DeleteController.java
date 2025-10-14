@@ -27,6 +27,7 @@ public class DeleteController {
 	@Autowired
 	private DeleteService service;
 
+	//社員情報削除入力画面
 	@RequestMapping("/employee/deleteForm")
 	public String showDeleteForm(Model model, HttpSession session) {
 
@@ -40,6 +41,7 @@ public class DeleteController {
 		return "deleteForm";
 	}
 
+	//複数情報削除入力画面
 	@RequestMapping("/someDeleteForm")
 	public String showSomeDeleteForm(@RequestParam(value = "id", required = false) List<Integer> ids, Model m,
 			HttpSession session) {
@@ -89,6 +91,7 @@ public class DeleteController {
 		return "delete_check";
 	}
 
+	//複数情報削除確認画面
 	@PostMapping("/employee/someDelete_check")
 	public String someDelete_check(@RequestParam(value = "id", required = false) List<Integer> ids,
 			HttpSession session, Model m) {
@@ -152,6 +155,7 @@ public class DeleteController {
 		return "delete_result";
 	}
 
+	//複数IDの削除画面
 	@PostMapping("/employee/someDelete")
 	public String deleteSomeEmployee(@RequestParam("id") List<Integer> ids,
 			Model m, HttpSession session) {
@@ -161,6 +165,7 @@ public class DeleteController {
 
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
+
 		for (Integer id : ids) {
 			service.delete(id);
 		}
@@ -182,6 +187,7 @@ public class DeleteController {
 		return "mainMenu";
 	}
 
+	//削除情報入力画面に転移 
 	@PostMapping("/employee/backDeleteForm")
 	public String backdeleteForm(@ModelAttribute("Employee") Employee employee, Model m, HttpSession session) {
 
@@ -195,6 +201,7 @@ public class DeleteController {
 		return "deleteForm";
 	}
 
+	//複数選択画面に転移(テスト用)
 	@PostMapping("/employee/backSomeDeleteForm")
 	public String backsomedeleteForm(@RequestParam("id") List<Integer> ids,
 			Model m, HttpSession session) {
@@ -223,6 +230,7 @@ public class DeleteController {
 		return "mainMenu";
 	}
 
+	//ダミーの検索画面に転移
 	@RequestMapping("/employee/seachEmployee")
 	public String searchEmployee(HttpSession session, Model m) {
 

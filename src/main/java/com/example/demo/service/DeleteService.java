@@ -15,13 +15,13 @@ public class DeleteService {
 		mapper.delete(id);
 	}
 
+	//入力がない場合のエラー(Entityがint型のため 0以下の場合 nullとする)
 	public boolean nullDeleteError(Employee employee) {
-		//変更予定
 		return employee.getId() > 0;
 	}
 
+	//該当のIDがない場合のエラー
 	public boolean recordEmptyDeleteError(Employee employee) {
-		//テーブルの中に一致するものを探してnullならエラー 
 		if (employee == null || employee.getId() == 0) {
 			return false;
 		}
@@ -29,7 +29,7 @@ public class DeleteService {
 		return dbEmployee != null;
 	}
 
-	//
+	//ログイン中のユーザーの削除エラー
 	public boolean loginUserDeleteError(int employeeId, int sessionUserId) {
 		//sessionにある値と照合し一致すればfalseを返す
 		return employeeId == sessionUserId;
