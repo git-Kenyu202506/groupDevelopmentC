@@ -23,10 +23,13 @@ public class Employee {
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
+	
+	public Employee(int id,String name,String password) {
+		this.id=id;
+		this.name=name;
+		this.password=password;
+	}
 
-	
-	
-	
 	//Getter・Setter
 	public int getId() {
 		return id;
