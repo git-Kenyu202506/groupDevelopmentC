@@ -231,8 +231,8 @@ public class DeleteController {
 	}
 
 	//ダミーの検索画面に転移
-	@RequestMapping("/employee/seachEmployee")
-	public String searchEmployee(HttpSession session, Model m) {
+	@RequestMapping("/employee/seachDummyEmployee")
+	public String searchEmployeeFromDelete(HttpSession session, Model m) {
 
 		String name = (String) session.getAttribute("name");
 		String loginDateTime = (String) session.getAttribute("loginDateTime");
@@ -240,7 +240,7 @@ public class DeleteController {
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
 
-		return "searchEmployee";
+		return "searchDummyEmployee";
 	}
 
 }
