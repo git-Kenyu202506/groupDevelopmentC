@@ -8,7 +8,7 @@ import com.example.demo.entity.Employee;
 @Mapper
 public interface RegisterMapper {
 
-	@Insert("INSERT INTO member (id, name, password,age,startDate,endDate) VALUES (#{id}, #{name}, #{password},#{age},#{startDate},#endDate)")
+	@Insert("INSERT INTO employee (id, name, password,age,startDate,endDate) VALUES (#{id}, #{name}, #{password},#{age},#{startDate},#{endDate})")
 	void insert(Employee employee);
 
 }
