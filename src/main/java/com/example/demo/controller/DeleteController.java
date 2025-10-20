@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dto.SearchCondition;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.DeleteService;
 
@@ -140,6 +141,35 @@ public class DeleteController {
 		return "someDelete_check";
 	}
 
+	//検索画面から複数情報削除確認画面
+	@PostMapping("/employee/searchDelete_check")
+	public String searchDelete_check(@RequestParam(value = "id", required = false) List<Integer> ids,
+			HttpSession session, Model m) {
+
+		Integer loginUserId = (Integer) session.getAttribute("id");
+		String name = (String) session.getAttribute("name");
+		String loginDateTime = (String) session.getAttribute("loginDateTime");
+
+		m.addAttribute("name", name);
+		m.addAttribute("loginDateTime", loginDateTime);
+
+		m.addAttribute("ids", ids);
+
+		if (ids == null) {
+			ids = new ArrayList();
+		}
+
+		ids.removeIf(id -> id == null || id == 0);
+
+		if (loginUserId != null && ids.contains(loginUserId)) {
+			m.addAttribute("loginUserDeleteError", "ログイン中のユーザーは削除できません。");
+			m.addAttribute("searchCondition", new SearchCondition());
+			return "searchEmployee";
+		}
+		m.addAttribute("msg", "社員情報の削除が完了しました");
+		return "delete_result";
+	}
+
 	// 削除完了画面に転移
 	@PostMapping("/employee/delete")
 	public String deleteEmployee(@ModelAttribute("Employee") Employee employee, Model m, HttpSession session) {
@@ -230,8 +260,8 @@ public class DeleteController {
 		return "mainMenu";
 	}
 
-	//ダミーの検索画面に転移
-	@RequestMapping("/employee/seachDummyEmployee")
+	//検索画面に転移 MainMenuとのidの型に違いがあるため
+	@GetMapping("/employee/searchEmployee")
 	public String searchEmployeeFromDelete(HttpSession session, Model m) {
 
 		String name = (String) session.getAttribute("name");
@@ -240,7 +270,9 @@ public class DeleteController {
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
 
-		return "searchDummyEmployee";
+		m.addAttribute("searchCondition", new SearchCondition());
+
+		return "searchEmployee";
 	}
 
 }
