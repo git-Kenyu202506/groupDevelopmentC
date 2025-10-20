@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.dto.SearchCondition;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.RegisterService;
 
@@ -142,18 +143,19 @@ public class RegisterController {
 		m.addAttribute("loginDateTime", loginDateTime);
 		return "mainMenu";
 	}
-
+  
 	// ダミー検索画面に転移
-	@GetMapping("/searchDummyEmployee")
-	public String showSearchForm(HttpSession session, Model m) {
+	@GetMapping("/employee/searchEmployee")
+	public String searchEmployeeFromInsert(HttpSession session, Model m) {
 
-		//ログイン情報のセッションを取得
 		String name = (String) session.getAttribute("name");
 		String loginDateTime = (String) session.getAttribute("loginDateTime");
 
 		m.addAttribute("name", name);
 		m.addAttribute("loginDateTime", loginDateTime);
 
-		return "searchDummyEmployee";
+		m.addAttribute("searchCondition", new SearchCondition());
+
+		return "searchEmployee";
 	}
 }

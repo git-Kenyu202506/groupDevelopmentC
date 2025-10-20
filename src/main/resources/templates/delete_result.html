@@ -25,14 +25,14 @@
 		<div class="container">
 			<div class="delete_result">
 				<div class="delete_result_contain">
-					<p class="result_msg" th:text="${msg}"></p>
+					<p class="result_msg" th:text="${msg}">社員情報の削除が完了しました</p>
 
 					<p class="copyright">Copyright &copy; 2025 JavaStudy Team C</p>
 
 					<div class="buttons">
 						<div class="result_button">
 							<a th:href="@{/employee/backToMainMenu}" class="input_button_like">メニュー</a>
-							<a th:href="@{/employee/seachDummyEmployee}" class="input_button_like orange_button">検索へ</a>
+							<a th:href="@{/employee/searchEmployee}" class="input_button_like orange_button">検索へ</a>
 						</div>
 					</div>
 				</div>
