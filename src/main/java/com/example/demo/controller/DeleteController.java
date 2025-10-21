@@ -144,6 +144,7 @@ public class DeleteController {
 	//検索画面から複数情報削除確認画面
 	@PostMapping("/employee/searchDelete_check")
 	public String searchDelete_check(@RequestParam(value = "id", required = false) List<Integer> ids,
+			@ModelAttribute("Employee") Employee employee,
 			HttpSession session, Model m) {
 
 		Integer loginUserId = (Integer) session.getAttribute("id");
@@ -165,6 +166,9 @@ public class DeleteController {
 			m.addAttribute("loginUserDeleteError", "ログイン中のユーザーは削除できません。");
 			m.addAttribute("searchCondition", new SearchCondition());
 			return "searchEmployee";
+		}
+		for (Integer id : ids) {
+			service.delete(id);
 		}
 		m.addAttribute("msg", "社員情報の削除が完了しました");
 		return "delete_result";
